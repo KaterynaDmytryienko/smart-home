@@ -1,4 +1,7 @@
 package smart.home.model;
 
-public class Sensor {
+import smart.home.event.Observer;
+
+public interface Sensor extends Observer {
+    public void reactToEvent();
 }

@@ -1,5 +1,5 @@
 package smart.home.model;
 
-public class Bathroom implements Room{
-
+public class Bathroom extends Room{
+ FloodSensor floodSensor;
 }
