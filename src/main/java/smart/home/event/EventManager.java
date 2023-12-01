@@ -5,13 +5,8 @@ import smart.home.model.Room;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventManager extends Thread{
+public class EventManager{
     List<Room> rooms;
-
-    @Override
-    public void run(){
-
-    }
 
     private List<Observer> observers = new ArrayList<>();
     public void addObserver(Observer observer) {

@@ -1,5 +1,6 @@
 package smart.home.activity;
 
+import smart.home.model.Event;
 import smart.home.model.Person;
 import smart.home.model.Room;
 
@@ -14,15 +15,17 @@ public class PersonActivity {
          //
          // }
         //randomly choose activity
+         //dispatch(type,)
      }
 
-     public void enterTheRoom(Room room){
-         room.setEmpty(false);
+     public Event enterTheRoom(Room room){
+         //room.setEmpty(false);
          //output to console
+
 
      }
     public void exitTheRoom(Room room){
-        room.setEmpty(true);
+       // room.setEmpty(true);
         //output to console
 
     }

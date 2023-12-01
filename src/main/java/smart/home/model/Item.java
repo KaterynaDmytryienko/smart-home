@@ -1,10 +1,12 @@
 package smart.home.model;
 
-public abstract class Item {
+public class Item {
     private int amount;
 
-    public Item(int amount) {
+    private String type;
+    public Item(int amount, String type) {
         this.amount = amount;
+        this.type = type;
     }
 
     public int getAmount() {
