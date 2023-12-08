@@ -1,6 +1,7 @@
 package smart.home.model;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class House {
     private List<Animal>animals;
@@ -8,7 +9,6 @@ public class House {
     private  List<Device>devices;
     private List<Sensor>sensors;
     private List<Item>items;
-//    private  List<Room>rooms;
     private  List<Floor>floors;
 
 
@@ -62,9 +62,9 @@ public class House {
         this.items = items;
     }
 
-//    public List<Room> getRooms() {
-//        return rooms;
-//    }
+    public List<Room> getRooms(int floorIndex) {
+        return floors.get(floorIndex).getRooms();
+    }
 //
 //    public void setRooms(List<Room> rooms) {
 //        this.rooms = rooms;

@@ -2,8 +2,7 @@ package smart.home.model;
 
 import smart.home.util.Documentation;
 
-public class Person {
-    private String name;
+public class Person extends Entity{
     private String gender;
     private int age;
     private boolean hasDriveLicense;
@@ -24,5 +23,37 @@ public class Person {
 
         }
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isHasDriveLicense() {
+        return hasDriveLicense;
+    }
+
+    public void setHasDriveLicense(boolean hasDriveLicense) {
+        this.hasDriveLicense = hasDriveLicense;
     }
 }

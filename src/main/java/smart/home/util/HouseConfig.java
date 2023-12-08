@@ -23,7 +23,6 @@ public class HouseConfig {
             add(new Person("Bella","female", 16, true));
             add(new Person("Edward","male", 20, true));
         }};
-//        List<Device> devicesConfig1 = /* Your list of devices for config 1 */;
 //        List<Sensor> sensorsConfig1 = new ArrayList<Sensor>(){{
 //            add()
 //        }};
@@ -76,6 +75,7 @@ public class HouseConfig {
             add(floor2);
 
         }};
+
 
         List<Floor> houseFloors = new ArrayList<Floor>();
         houseFloors.add(floor1);

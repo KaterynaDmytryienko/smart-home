@@ -1,32 +1,31 @@
 package smart.home.event;
 
+import smart.home.activity.AnimalActivity;
 import smart.home.activity.PersonActivity;
+
+import java.util.Random;
 
 public class EventGenerator {
     private EventManager eventManager;
     private PersonActivity personActivity;
+    private AnimalActivity animalActivity;
 
-    public EventGenerator() {
-        eventManager = new EventManager();
-        runSimulation();
+    public EventGenerator(EventManager eventManager) {
+        this.eventManager = eventManager;
         personActivity = new PersonActivity();
-    }
-
-    private void runSimulation() {
-        // Simulate events
-        dispatchEvent(Even_Types.HEAT, "Living Room Light");
-        dispatchEvent(Even_Types.TEMPERATURE_CHANGE, "Thermostat");
-    }
-
-    private void dispatchEvent(Even_Types eventType, String source) {
-        Event event = new Event(eventType, source);
-        eventManager.alertObservers(event);
+        animalActivity  =new AnimalActivity();
     }
 
 
     public void generateEvent(){
-        //rand
-        personActivity.enterTheRoom();
+        Random rand = new Random();
+        Event event = personActivity.doSomething();
+        if (rand.nextBoolean()){
+            event=animalActivity.doSomething();
+        }
+
+        eventManager.handleEvent(event);
+
     }
 
 

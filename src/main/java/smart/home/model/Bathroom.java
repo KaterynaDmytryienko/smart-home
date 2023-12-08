@@ -6,6 +6,7 @@ public class Bathroom extends Room {
  public Bathroom(){
   super();
   setFloodSensor(new FloodSensor());
+  setName("Bathroom");
  }
  public FloodSensor getFloodSensor() {
   return floodSensor;
