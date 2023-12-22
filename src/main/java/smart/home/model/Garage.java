@@ -8,6 +8,10 @@ public class Garage extends Room{
         super();
         setName("Garage");
     }
+    public Garage(List<Device>devices){
+        super(devices);
+        setName("Garage");
+    }
     private List<Car>cars;
     private List<Bicycle> bicycles;
 

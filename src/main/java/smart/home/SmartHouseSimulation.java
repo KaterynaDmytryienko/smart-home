@@ -21,8 +21,8 @@ public class  SmartHouseSimulation {
         houseConfig1.setFirstHouseConfig();
         smartHouseAPI.subscribeDevices();
         EventGenerator eventGenerator=new EventGenerator(eventManager);
-
-
+        House house=House.getHouse();
+        house.setEventManager(eventManager);
 
         final long startTime = 6;
         final long endTime = 18;
@@ -40,10 +40,11 @@ public class  SmartHouseSimulation {
             LOGGER.log(Level.INFO,"Simulated time: " +  currentTime + ":00");
             //rand event generated
             eventGenerator.generateEvent();
+
+            //update device consumption
+            smartHouseAPI.collectDeviceData();
+            smartHouseAPI.updatePerformance();
             currentTime += 1 * simulationSpeed;
-
-
-
             try {
                 Thread.sleep(100); // Adjust as needed
             } catch (InterruptedException e) {

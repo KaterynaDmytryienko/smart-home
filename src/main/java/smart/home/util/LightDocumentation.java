@@ -10,7 +10,7 @@ public class LightDocumentation implements Documentation{
     public String getDocumentationFilePath(){
         return documentationFilePath;
     };
-    public void displayDocumentation() {
-
+    public String getDocumentationManual() {
+         return "GOT IT";
     }
 }

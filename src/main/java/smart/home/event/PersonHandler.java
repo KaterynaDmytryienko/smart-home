@@ -38,12 +38,14 @@ public class PersonHandler implements EventHandler {
             }
         }
         switch (event.getType()){
+            case DEVICE_BREAKAGE:
+                System.out.println("WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+                personActivity.fixDevice(selectedPerson,event.getDevice());
             case BABY_SCREAM:
                 personActivity.helpTheChild(selectedPerson);
                 break;
             case FLOOD:break;
             case HEAT:break;
-
         }
     }
 

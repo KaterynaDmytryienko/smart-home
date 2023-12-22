@@ -54,17 +54,27 @@ public class HouseConfig {
 //            add(garage);
 //        }};
 
+        final Device fridge=new Fridge();
+        final Device fridge2=new Fridge();
+
+        final List<Device>devices = new ArrayList<Device>(){{
+            add(new Bicycle());
+            add(new Car());
+            add(fridge);
+            add(fridge2);
+        }};
+
         final Floor floor1 = new Floor(1);
         final Floor floor2 = new Floor(2);
         List<Room> roomsFloor1 = new ArrayList<Room>(){{
             add(livingRoom);
-            add(new Bathroom());
-            add(new Kitchen());
-            add(new BedRoom());}};
+            add(new Bathroom(devices));
+            add(new Kitchen(devices));
+            add(new BedRoom(devices));}};
 
         List<Room> roomsFloor2 = new ArrayList<Room>(){{
-            add(new BedRoom());
-            add(new BedRoom());
+            add(new BedRoom(devices));
+            add(new BedRoom(devices));
             add(garage);}};
 
         floor1.setRooms(roomsFloor1);
@@ -77,9 +87,12 @@ public class HouseConfig {
         }};
 
 
+
         List<Floor> houseFloors = new ArrayList<Floor>();
         houseFloors.add(floor1);
         houseFloors.add(floor2);
+
+
 
 
         //assigning lists to house

@@ -32,4 +32,14 @@ public class LightDevice extends Device{
         event.getRoom().getLightDevice().isTurnedOn = false;
         deviceAPI.turnOff(event,event.getRoom().getLightDevice());
     }
+
+    @Override
+    public void updateConsumption() {
+
+    }
+
+    @Override
+    public void getsBroken() {
+
+    }
 }

@@ -10,4 +10,6 @@ public interface DeviceAPI<T extends Device> {
 
     public void turnOn(Event event, T device);
     public void turnOff(Event event, T device);
+
+    public void collectDeviceData(T device);
 }

@@ -17,11 +17,13 @@ public class SmartHouseAPI {
 House house = House.getHouse();
 
 public void subscribeDevices(){
+
     for(Floor floor : house.getFloors()){
         for(Room room : floor.getRooms()){
             eventManager.subscribe(room.getLightDevice());
             eventManager.subscribe(room.getMotionSensor());
             eventManager.subscribe(room.getThermostatSensor());
+
 
             if(room instanceof Bathroom){
                 eventManager.subscribe(((Bathroom) room).getFloodSensor());
@@ -29,10 +31,27 @@ public void subscribeDevices(){
             if(room instanceof Kitchen){
                 eventManager.subscribe(((Kitchen) room).getFloodSensor());
             }
-
+            if(room.getDevices()!=null) {
+                for (Device d : room.getDevices()) {
+                    eventManager.subscribe(d);
+                }
+            }
         }
     }
 }
+
+
+    public void collectDeviceData() {
+        for(Device d: house.getDevices()){
+            d.recordConsumption();
+        }
+    }
+    public void updatePerformance(){
+        for(Device d: house.getDevices()){
+            //pick random ones
+            d.downgradePerformance();
+        }
+    }
 
 public void openBlinds(){
     LOGGER.info("Blinds are open!");

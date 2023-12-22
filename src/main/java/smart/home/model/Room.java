@@ -1,5 +1,7 @@
 package smart.home.model;
 
+import java.util.List;
+
 public abstract class Room {
     private String name;
 
@@ -11,13 +13,22 @@ public abstract class Room {
         this.name = name;
     }
 
-    public Room(){
+    public Room(List<Device>devices){
         setLightDevice(new LightDevice());
         setMotionSensor(new MotionSensor());
         setThermostatSensor(new ThermostatSensor());
+        this.devices = devices;
+    }
+    public Room(){
+
     }
     private boolean isEmpty = false;
 
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    private List<Device>devices;
     private MotionSensor motionSensor;
     private LightDevice lightDevice;
     private ThermostatSensor thermostatSensor;

@@ -28,4 +28,9 @@ public class DeviceApiImpl<T extends Device> implements DeviceAPI<T>{
         // Add logic for other types of devices if needed
     }
 
+    @Override
+    public void collectDeviceData(T device) {
+
+    }
+
 }

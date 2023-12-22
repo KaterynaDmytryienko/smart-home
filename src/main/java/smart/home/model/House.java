@@ -1,9 +1,21 @@
 package smart.home.model;
 
+import smart.home.event.EventManager;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class House {
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+    }
+
+    private EventManager eventManager;
     private List<Animal>animals;
     private  List<Person>people;
     private  List<Device>devices;
@@ -39,7 +51,17 @@ public class House {
     }
 
     public List<Device> getDevices() {
-        return devices;
+        List<Device>devices1=new ArrayList<>();
+        for(Floor floor : house.getFloors()){
+            for(Room room : floor.getRooms()) {
+                if(room.getDevices()!=null){
+                    for (Device d: room.getDevices()) devices1.add(d);
+                }
+            }
+
+        }
+
+        return devices1;
     }
 
     public void setDevices(List<Device> devices) {

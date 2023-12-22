@@ -51,8 +51,16 @@ public class PersonActivity {
 //        System.out.println("Exit" + person.getName());
 //        return new Event(Even_Types.FLOOD, person, room);
 //    }
+    public void fixDevice(Person person,Device device){
+        LOGGER.info( person.getName()+" fixing the "+ device.getName(device));
+       // LOGGER.info(device.getDocumentation().getDocumentationManual());
+      //  device.setPerformance(10);
+        Device.ConsumptionRecord latestRecord = device.getLatestConsumptionRecord();
+        latestRecord.setFunctionality(100);
+    }
 
     public void helpTheChild(Person person){
+
         LOGGER.info("Helping the child..." + person.getName());
     }
 
