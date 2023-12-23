@@ -7,7 +7,7 @@ import smart.home.model.*;
 import java.util.List;
 import java.util.Random;
 
-public class AnimalActivity {
+public class AnimalActivity implements Activity{
     private List<Animal> animals = House.getHouse().getAnimals();
     boolean isBusy;
     House house = House.getHouse();
@@ -15,7 +15,7 @@ public class AnimalActivity {
     public List<Animal> getAnimals() {
         return animals;
     }
-
+@Override
     public Event doSomething(){
         Random rand = new Random();
         Animal selectedAnimal = animals.get(rand.nextInt(animals.size()));

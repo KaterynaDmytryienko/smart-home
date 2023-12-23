@@ -10,7 +10,7 @@ public class PersonHandler implements EventHandler {
     private EventHandler eventHandler;
     private EventManager eventManager;
 
-    private PersonActivity personActivity;
+    private PersonActivity personActivity = new PersonActivity();
 
     public PersonHandler(EventManager eventManager){
         this.eventManager = eventManager;
@@ -25,7 +25,7 @@ public class PersonHandler implements EventHandler {
     public void handleEvent(Event event) {
         List<Person>people = personActivity.getPeople();
         Random rand = new Random();
-        Person selectedPerson = people.get(rand.nextInt(people.size()));;
+        Person selectedPerson = people.get(rand.nextInt(people.size()));
         //enum types go in order from the ones adult only can handle(up to the ordinal 3)
         if(event.getType().ordinal() < 3){
             while (selectedPerson.getAge() < 18){
@@ -40,12 +40,20 @@ public class PersonHandler implements EventHandler {
         switch (event.getType()){
             case DEVICE_BREAKAGE:
                 System.out.println("WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-                personActivity.fixDevice(selectedPerson,event.getDevice());
+                personActivity.fixDevice(selectedPerson,event.getDevice());break;
             case BABY_SCREAM:
                 personActivity.helpTheChild(selectedPerson);
                 break;
             case FLOOD:break;
             case HEAT:break;
+            case HUNGRY:
+                personActivity.eat(selectedPerson);
+                break;
+            case THIRSTY:
+                personActivity.drink(selectedPerson);break;
+            case PLAY:
+                personActivity.play(selectedPerson);
+                break;
         }
     }
 

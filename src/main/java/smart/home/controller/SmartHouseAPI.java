@@ -4,6 +4,7 @@ import smart.home.activity.PersonActivity;
 import smart.home.event.EventManager;
 import smart.home.model.*;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class SmartHouseAPI {
@@ -47,9 +48,16 @@ public void subscribeDevices(){
         }
     }
     public void updatePerformance(){
+        Random rand = new Random();
+        int devIndex= rand.nextInt(house.getDevices().size());
+
         for(Device d: house.getDevices()){
-            //pick random ones
-            d.downgradePerformance();
+            if(rand.nextBoolean()){
+                //pick random ones
+                d.downgradePerformance();
+                break;
+            }
+
         }
     }
 

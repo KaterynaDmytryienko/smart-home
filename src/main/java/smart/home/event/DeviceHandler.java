@@ -16,7 +16,7 @@ public class DeviceHandler implements EventHandler{
     public void handleEvent(Event event) {
         eventManager.alertObservers(event);
             if (!event.isHandled){
-                assignToNext(eventHandler);
+                eventHandler.handleEvent(event);
             }
 
 

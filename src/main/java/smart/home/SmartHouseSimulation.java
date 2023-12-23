@@ -15,10 +15,11 @@ import java.util.logging.Logger;
 public class  SmartHouseSimulation {
     private static final Logger LOGGER = Logger.getLogger(SmartHouseSimulation.class.getName());
     public static void main(String[] args) {
-        EventManager eventManager = new EventManager();
-        SmartHouseAPI smartHouseAPI=new SmartHouseAPI(eventManager);
+
         HouseConfig houseConfig1 = new HouseConfig();
         houseConfig1.setFirstHouseConfig();
+        EventManager eventManager = new EventManager();
+        SmartHouseAPI smartHouseAPI=new SmartHouseAPI(eventManager);
         smartHouseAPI.subscribeDevices();
         EventGenerator eventGenerator=new EventGenerator(eventManager);
         House house=House.getHouse();

@@ -25,6 +25,16 @@ public abstract class Device implements Observer {
     }
 
     private DeviceState currentState = DeviceState.IDLE;
+
+    public int getFunctionality() {
+        return functionality;
+    }
+
+
+    public void setFunctionality(int functionality) {
+        this.functionality = functionality;
+    }
+
     private int functionality = 100; // Assuming 100 is the max functionality
     private int activeConsumption;
     private int idleConsumption;
@@ -56,12 +66,12 @@ public abstract class Device implements Observer {
     }
 
     private List<ConsumptionRecord> consumptionHistory = new ArrayList<>();
-    public ConsumptionRecord getLatestConsumptionRecord() {
-        if (!consumptionHistory.isEmpty()) {
-            return consumptionHistory.get(consumptionHistory.size() - 1);
-        }
-        return null;
-    }
+//    public ConsumptionRecord getLatestConsumptionRecord() {
+//        if (!consumptionHistory.isEmpty()) {
+//            return consumptionHistory.get(consumptionHistory.size() - 1);
+//        }
+//        return null;
+//    }
  public Room getCurrentRoom(){
       for(Floor floor:house.getFloors()){
           for(Room room: floor.getRooms()){
@@ -99,12 +109,8 @@ public abstract class Device implements Observer {
         long currentTime = System.currentTimeMillis(); // Or your simulation's time
         consumptionHistory.add(new ConsumptionRecord(currentElectricityConsumption, currentGasConsumption, currentWaterConsumption, functionality, currentTime));
 
-        Random random = new Random();
-        if(random.nextBoolean()){
-           functionality-= random.nextInt(40)+10;
-        }
-//        // Decrease functionality linearly over time
-//        functionality--; // Adjust the decrement as per your simulation's needs
+        // Decrease functionality linearly over time
+        functionality--; // Adjust the decrement as per your simulation's needs
     }
 
     private Documentation documentation;
@@ -154,8 +160,8 @@ public abstract class Device implements Observer {
 //    }
     public void downgradePerformance(){
         Random rand = new Random();
-        int eventIndex = rand.nextInt(10)+7;
-        functionality-=eventIndex*10;
+        int eventIndex = rand.nextInt(6)+3;
+        functionality-=eventIndex*5;
         if(functionality<=0){
             Event event=new Event(Even_Types.DEVICE_BREAKAGE,this,getCurrentRoom());
             house.getEventManager().handleEvent(event);
