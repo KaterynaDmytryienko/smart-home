@@ -7,7 +7,14 @@ import java.util.List;
 
 public class EventManager{
     List<Room> rooms;
+
     private EventHandler firstHandler;
+
+    public List<String> getHandledEventsList() {
+        return handledEventsList;
+    }
+
+    private List<String>handledEventsList = new ArrayList<>();
 
     public EventManager(){
         EventHandler deviceHandler = new DeviceHandler(this);

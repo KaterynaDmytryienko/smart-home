@@ -40,9 +40,18 @@ public class PersonHandler implements EventHandler {
         switch (event.getType()){
             case DEVICE_BREAKAGE:
                 System.out.println("WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-                personActivity.fixDevice(selectedPerson,event.getDevice());break;
+                personActivity.fixDevice(selectedPerson,event.getDevice());
+                if(event.getDevice()!=null){
+                    eventManager.getHandledEventsList().add(selectedPerson.getName() + " fixing the " + event.getDevice().getName(event.getDevice()));
+                }
+
+                break;
+
+
+
             case BABY_SCREAM:
                 personActivity.helpTheChild(selectedPerson);
+                eventManager.getHandledEventsList().add(selectedPerson.getName() + "helped the child");
                 break;
             case FLOOD:break;
             case HEAT:break;

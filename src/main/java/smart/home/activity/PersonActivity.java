@@ -41,8 +41,6 @@ public class PersonActivity implements Activity{
 
          return new Event(events[eventIndex],selectedPerson,rooms.get(roomIndex));
 
-
-
      }
 
 //     public Event enterTheRoom(Room room, Person person){

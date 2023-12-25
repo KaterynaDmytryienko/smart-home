@@ -6,8 +6,7 @@ import smart.home.event.EventGenerator;
 import smart.home.event.EventManager;
 import smart.home.event.Observer;
 import smart.home.model.House;
-import smart.home.util.EventLogger;
-import smart.home.util.HouseConfig;
+import smart.home.util.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +51,11 @@ public class  SmartHouseSimulation {
                 e.printStackTrace();
             }
         }
+        Report houseConfigReport = new HouseConfigurationReport();
+        houseConfigReport.generateReport("HouseConfigurationReport.txt");
 
+        Report eventReport = new EventReport(eventGenerator, eventManager);
+        eventReport.generateReport("EventReport.txt");
     }
 
 }
