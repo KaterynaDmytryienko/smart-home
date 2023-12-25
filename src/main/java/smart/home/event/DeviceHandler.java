@@ -17,6 +17,8 @@ public class DeviceHandler implements EventHandler{
         eventManager.alertObservers(event);
             if (!event.isHandled){
                 eventHandler.handleEvent(event);
+            }else{
+                eventManager.addToEvents(event);
             }
 
 

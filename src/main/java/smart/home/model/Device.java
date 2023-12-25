@@ -7,12 +7,81 @@ import smart.home.event.Observer;
 import smart.home.util.Documentation;
 import smart.home.util.DocumentationLoader;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.sql.Struct;
+import java.util.*;
 
 public abstract class Device implements Observer {
+    public class Consumption {
+        private int electricityConsumption;
+        private int gasConsumption;
+        private int waterConsumption;
+
+        // Constructors, getters, setters, etc.
+
+        public Consumption(int electricityConsumption, int gasConsumption, int waterConsumption) {
+            this.electricityConsumption = electricityConsumption;
+            this.gasConsumption = gasConsumption;
+            this.waterConsumption = waterConsumption;
+        }
+
+        public int getElectricityConsumption() {
+            return electricityConsumption;
+        }
+
+        public void setElectricityConsumption(int electricityConsumption) {
+            this.electricityConsumption = electricityConsumption;
+        }
+
+        public int getGasConsumption() {
+            return gasConsumption;
+        }
+
+        public void setGasConsumption(int gasConsumption) {
+            this.gasConsumption = gasConsumption;
+        }
+
+        public int getWaterConsumption() {
+            return waterConsumption;
+        }
+
+        public void setWaterConsumption(int waterConsumption) {
+            this.waterConsumption = waterConsumption;
+        }
+    }
+
+    public void setActiveConsumption(Consumption activeConsumption) {
+        this.activeConsumption = activeConsumption;
+    }
+
+    public void setOffConsumption(Consumption offConsumption) {
+        this.offConsumption = offConsumption;
+    }
+
+    public void setIdleConsumption(Consumption idleConsumption) {
+        this.idleConsumption = idleConsumption;
+    }
+
+    Consumption activeConsumption;
+    Consumption offConsumption;
+    Consumption idleConsumption;
     House house = House.getHouse();
+
+    public Map<String, Integer> getUsers() {
+        return users;
+    }
+    public int getUserCount(String name) {
+        return users.getOrDefault(name, 0);
+    }
+    public void addUser(String name) {
+        if (users.containsKey(name)) {
+            int currentCount = users.get(name);
+            users.put(name, currentCount + 1);
+        } else {
+            users.put(name, 1);
+        }
+    }
+
+    Map<String, Integer> users = new HashMap<>();
 
     public enum DeviceState {ACTIVE, IDLE, OFF}
 
@@ -36,11 +105,23 @@ public abstract class Device implements Observer {
     }
 
     private int functionality = 100; // Assuming 100 is the max functionality
-    private int activeConsumption;
-    private int idleConsumption;
-    private int offConsumption;
+//    private int activeConsumption;
+//    private int idleConsumption;
+//    private int offConsumption;
 
     public static class ConsumptionRecord {
+        public int getElectricityConsumption() {
+            return electricityConsumption;
+        }
+
+        public int getGasConsumption() {
+            return gasConsumption;
+        }
+
+        public int getWaterConsumption() {
+            return waterConsumption;
+        }
+
         int electricityConsumption;
         int gasConsumption;
         int waterConsumption;
@@ -66,6 +147,10 @@ public abstract class Device implements Observer {
     }
 
     private List<ConsumptionRecord> consumptionHistory = new ArrayList<>();
+    public List<ConsumptionRecord> getConsumptionHistory() {
+        return consumptionHistory;
+    }
+
 //    public ConsumptionRecord getLatestConsumptionRecord() {
 //        if (!consumptionHistory.isEmpty()) {
 //            return consumptionHistory.get(consumptionHistory.size() - 1);
@@ -93,24 +178,27 @@ public abstract class Device implements Observer {
 
         switch (currentState) {
             case ACTIVE:
-                currentElectricityConsumption = activeConsumption;
-                // Add logic for gas and water consumption if applicable
+                currentElectricityConsumption = activeConsumption.electricityConsumption;
+                currentGasConsumption=activeConsumption.gasConsumption;
+                currentWaterConsumption=activeConsumption.waterConsumption;
                 break;
             case IDLE:
-                currentElectricityConsumption = idleConsumption;
-                // Add logic for gas and water consumption if applicable
+                currentElectricityConsumption = idleConsumption.electricityConsumption;
+                currentGasConsumption=idleConsumption.gasConsumption;
+                currentWaterConsumption=idleConsumption.waterConsumption;
                 break;
             case OFF:
-                currentElectricityConsumption = offConsumption;
-                // Add logic for gas and water consumption if applicable
+                currentElectricityConsumption = offConsumption.electricityConsumption;
+                currentGasConsumption=offConsumption.gasConsumption;
+                currentWaterConsumption=offConsumption.waterConsumption;
                 break;
         }
 
-        long currentTime = System.currentTimeMillis(); // Or your simulation's time
+        long currentTime = System.currentTimeMillis();
         consumptionHistory.add(new ConsumptionRecord(currentElectricityConsumption, currentGasConsumption, currentWaterConsumption, functionality, currentTime));
 
-        // Decrease functionality linearly over time
-        functionality--; // Adjust the decrement as per your simulation's needs
+        // functionality decreases linearly over time
+        functionality--;
     }
 
     private Documentation documentation;
@@ -130,7 +218,7 @@ public abstract class Device implements Observer {
         this.documentation = null;
     }
 
-    public  String getName(Device device) {
+    public String getName(Device device) {
         if(device instanceof LightDevice){
             String documentationFilePath = "path.txt";
             return "LightDevice";
@@ -165,29 +253,25 @@ public abstract class Device implements Observer {
         if(functionality<=0){
             Event event=new Event(Even_Types.DEVICE_BREAKAGE,this,getCurrentRoom());
             house.getEventManager().handleEvent(event);
+
         }
     }
 
-//    public void setCurrentConsumption(int currentConsumption) {
-//        this.currentConsumption = currentConsumption;
+//    public void setActiveConsumption(int activeConsumption) {
+//        this.activeConsumption = activeConsumption;
 //    }
 
-
-    public void setActiveConsumption(int activeConsumption) {
-        this.activeConsumption = activeConsumption;
-    }
-
-    public void setOffConsumption(int offConsumption) {
-        this.offConsumption = offConsumption;
-    }
-
-    public int getIdleConsumption() {
-        return idleConsumption;
-    }
-
-    public void setIdleConsumption(int idleConsumption) {
-        this.idleConsumption = idleConsumption;
-    }
+//    public void setOffConsumption(int offConsumption) {
+//        this.offConsumption = offConsumption;
+//    }
+//
+//    public int getIdleConsumption() {
+//        return idleConsumption;
+//    }
+//
+//    public void setIdleConsumption(int idleConsumption) {
+//        this.idleConsumption = idleConsumption;
+//    }
 
     public abstract void updateConsumption();
     public abstract void getsBroken();

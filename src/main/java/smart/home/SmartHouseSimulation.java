@@ -46,16 +46,23 @@ public class  SmartHouseSimulation {
             smartHouseAPI.updatePerformance();
             currentTime += 1 * simulationSpeed;
             try {
-                Thread.sleep(100); // Adjust as needed
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //generating
         Report houseConfigReport = new HouseConfigurationReport();
         houseConfigReport.generateReport("HouseConfigurationReport.txt");
 
         Report eventReport = new EventReport(eventGenerator, eventManager);
         eventReport.generateReport("EventReport.txt");
+
+        Report activitiesAndUsageReport = new ActivityAndUsageReport(eventGenerator, eventManager);
+        activitiesAndUsageReport.generateReport("ActivityAndUsageReport.txt");
+
+        Report deviceConsumptionReport = new ConsumptionReport();
+        deviceConsumptionReport.generateReport("ConsumptionReport.txt");
     }
 
 }

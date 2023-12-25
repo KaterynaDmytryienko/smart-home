@@ -11,24 +11,25 @@ public class HouseConfigurationReport extends Report{
         reportBuilder.append("House Configuration Report\n");
 
         // Animals
-        reportBuilder.append("Animals:\n");
+        reportBuilder.append("\nAnimals:\n\n");
         for (Animal animal : house.getAnimals()) {
-            reportBuilder.append(animal.getName()).append("\n");
+            reportBuilder.append(animal.getName()).append(",\t");
         }
 
         // People
         reportBuilder.append("\nPeople:\n");
         for (Person person : house.getPeople()) {
-            reportBuilder.append(person.getName()).append("\n");
+            reportBuilder.append(person.getName()).append(",\t");
         }
 
         // Floors and Rooms
-        reportBuilder.append("\nHouse Floors and Rooms:\n");
+        reportBuilder.append("\n\nHouse Floors and Rooms:\n");
         for (Floor floor : house.getFloors()) {
             reportBuilder.append("Floor ").append(floor.getLevel()).append(":\n");
             for (Room room : floor.getRooms()) {
-                reportBuilder.append("\t").append(room.getName()).append(": ");
+                reportBuilder.append("\n\t").append(room.getName());
                 if (room.getDevices() != null) {
+                    reportBuilder.append(":\n\t\tDevices: ");
                     for (Device device : room.getDevices()) {
                         reportBuilder.append(device.getName(device)).append(", ");
                     }
@@ -38,9 +39,9 @@ public class HouseConfigurationReport extends Report{
         }
 
         // Items
-        reportBuilder.append("\nItems:\n");
+        reportBuilder.append("\n\nItems:\n\t");
         for (Item item : house.getItems()) {
-            reportBuilder.append(item.toString()).append("\n");
+            reportBuilder.append(item.getType()).append("\n");
         }
 
         return reportBuilder.toString();

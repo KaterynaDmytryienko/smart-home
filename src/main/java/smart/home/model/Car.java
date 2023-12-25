@@ -10,9 +10,12 @@ public class Car extends Device{
     private String type = "regular";
 
     public Car() {  super();
-        setActiveConsumption(400);
-        setOffConsumption(100);
-        setIdleConsumption(200);
+        Consumption activeConsumption=new Consumption(400,300,100);
+        setActiveConsumption(activeConsumption);
+        Consumption offConsumption=new Consumption(200,0,0);
+        setOffConsumption(offConsumption);
+        Consumption idleConsumption=new Consumption(300,0,200);
+        setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.ACTIVE);
     }
 

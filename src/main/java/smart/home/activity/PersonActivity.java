@@ -68,11 +68,23 @@ public class PersonActivity implements Activity{
     }
 
     public void eat(Person person){
-        LOGGER.info("Eating..."+person.getName());
+        LOGGER.info(person.getName()+" is eating.");
+        for(Device d: house.getDevices()){
+            if(d instanceof Fridge){
+                d.addUser(person.getName());
+                break;
+            }
+        }
     }
 
     public void drink(Person person){
-        LOGGER.info("Drinking..."+person.getName());
+        LOGGER.info(person.getName()+" is drinking.");
+        for(Device d: house.getDevices()){
+            if(d instanceof Fridge){
+                d.addUser(person.getName());
+                break;
+            }
+        }
     }
     public void play(Person person){
         LOGGER.info("Playing..."+person.getName());

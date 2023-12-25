@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EventGenerator {
-    public List<Event> getEvents() {
-        return events;
-    }
 
-    private List<Event>events = new ArrayList<>();
     private EventManager eventManager;
     private PersonActivity personActivity;
     private AnimalActivity animalActivity;
@@ -27,12 +23,11 @@ public class EventGenerator {
     public void generateEvent(){
         Random rand = new Random();
         Event event = personActivity.doSomething();
-        events.add(event);
+
         if (rand.nextBoolean()){
             event=animalActivity.doSomething();
-            events.add(event);
         }
-
+//       events.add(event);
         eventManager.handleEvent(event);
 
     }

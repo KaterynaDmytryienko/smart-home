@@ -37,33 +37,37 @@ public class PersonHandler implements EventHandler {
                 selectedPerson = people.get(rand.nextInt(people.size()));
             }
         }
+        Event eventToArchive=event;
+        eventToArchive.setSource(selectedPerson);
         switch (event.getType()){
             case DEVICE_BREAKAGE:
                 System.out.println("WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
                 personActivity.fixDevice(selectedPerson,event.getDevice());
-                if(event.getDevice()!=null){
-                    eventManager.getHandledEventsList().add(selectedPerson.getName() + " fixing the " + event.getDevice().getName(event.getDevice()));
-                }
-
+                if(event.getDevice()!=null)eventToArchive.setDevice(event.getDevice());
+//                if(event.getDevice()!=null){eventManager.getHandledEventsList().add(selectedPerson.getName() + " fixing the " + event.getDevice().getName(event.getDevice()));
+//                }
                 break;
-
-
 
             case BABY_SCREAM:
                 personActivity.helpTheChild(selectedPerson);
-                eventManager.getHandledEventsList().add(selectedPerson.getName() + "helped the child");
+               // eventManager.getHandledEventsList().add(selectedPerson.getName() + " helped the child ");
                 break;
             case FLOOD:break;
             case HEAT:break;
             case HUNGRY:
                 personActivity.eat(selectedPerson);
+                eventToArchive=event;
                 break;
             case THIRSTY:
-                personActivity.drink(selectedPerson);break;
+                personActivity.drink(selectedPerson);
+                eventToArchive=event;
+                break;
             case PLAY:
                 personActivity.play(selectedPerson);
+                eventToArchive=event;
                 break;
         }
+        eventManager.addToEvents(eventToArchive);
     }
 
 

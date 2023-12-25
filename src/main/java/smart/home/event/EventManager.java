@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventManager{
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    private List<Event>events = new ArrayList<>();
+
     List<Room> rooms;
 
     private EventHandler firstHandler;
@@ -37,6 +43,9 @@ public class EventManager{
               if(observer!=null) observer.update(event);
 
         }
+    }
+    public void addToEvents(Event event){
+        events.add(event);
     }
     public void handleEvent(Event event){
         if (firstHandler != null) {

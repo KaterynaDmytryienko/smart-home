@@ -6,6 +6,26 @@ import smart.home.model.Person;
 import smart.home.model.Room;
 
 public class Event {
+    public Event() {
+
+    }
+
+    public void setType(Even_Types type) {
+        this.type = type;
+    }
+
+    public void setSource(Entity source) {
+        this.source = source;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     private Even_Types type;
     private Entity source;
 
