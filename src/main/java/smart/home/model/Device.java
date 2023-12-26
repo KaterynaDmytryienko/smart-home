@@ -1,13 +1,11 @@
 package smart.home.model;
 
-import smart.home.controller.SmartHouseAPI;
 import smart.home.event.Even_Types;
 import smart.home.event.Event;
 import smart.home.event.Observer;
-import smart.home.util.Documentation;
-import smart.home.util.DocumentationLoader;
+import smart.home.util.documentation.Documentation;
+import smart.home.util.documentation.DocumentationLoader;
 
-import java.sql.Struct;
 import java.util.*;
 
 public abstract class Device implements Observer {
@@ -104,10 +102,7 @@ public abstract class Device implements Observer {
         this.functionality = functionality;
     }
 
-    private int functionality = 100; // Assuming 100 is the max functionality
-//    private int activeConsumption;
-//    private int idleConsumption;
-//    private int offConsumption;
+    private int functionality = 100;
 
     public static class ConsumptionRecord {
         public int getElectricityConsumption() {
@@ -151,12 +146,6 @@ public abstract class Device implements Observer {
         return consumptionHistory;
     }
 
-//    public ConsumptionRecord getLatestConsumptionRecord() {
-//        if (!consumptionHistory.isEmpty()) {
-//            return consumptionHistory.get(consumptionHistory.size() - 1);
-//        }
-//        return null;
-//    }
  public Room getCurrentRoom(){
       for(Floor floor:house.getFloors()){
           for(Room room: floor.getRooms()){
@@ -242,10 +231,6 @@ public abstract class Device implements Observer {
         }
         return documentation;
     }
-
-  //  public int getCurrentConsumption() {
-//        return currentConsumption;
-//    }
     public void downgradePerformance(){
         Random rand = new Random();
         int eventIndex = rand.nextInt(6)+3;
@@ -253,26 +238,9 @@ public abstract class Device implements Observer {
         if(functionality<=0){
             Event event=new Event(Even_Types.DEVICE_BREAKAGE,this,getCurrentRoom());
             house.getEventManager().handleEvent(event);
-
+            this.setCurrentState(DeviceState.OFF);
         }
     }
 
-//    public void setActiveConsumption(int activeConsumption) {
-//        this.activeConsumption = activeConsumption;
-//    }
 
-//    public void setOffConsumption(int offConsumption) {
-//        this.offConsumption = offConsumption;
-//    }
-//
-//    public int getIdleConsumption() {
-//        return idleConsumption;
-//    }
-//
-//    public void setIdleConsumption(int idleConsumption) {
-//        this.idleConsumption = idleConsumption;
-//    }
-
-    public abstract void updateConsumption();
-    public abstract void getsBroken();
 }

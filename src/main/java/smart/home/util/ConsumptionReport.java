@@ -1,12 +1,9 @@
 package smart.home.util;
 
 import smart.home.controller.DeviceAPI;
-import smart.home.controller.DeviceApiImpl;
-import smart.home.event.Event;
+import smart.home.controller.DeviceAPII;
 import smart.home.model.Device;
 import smart.home.model.House;
-
-import java.util.List;
 
 public class ConsumptionReport extends Report{
     public ConsumptionReport() {
@@ -18,7 +15,7 @@ public class ConsumptionReport extends Report{
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append("Device consumption report\n");
         House house=House.getHouse();
-        DeviceAPI<Device> deviceAPI = new DeviceApiImpl<>();
+        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
         double totalElectricity=0.0;
         double totalGas=0.0;
         double totalWater=0.0;

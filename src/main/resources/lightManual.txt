@@ -1,0 +1,7 @@
+Issue: Bulb Replacement
+Solution:
+Turn off power.
+Remove the old bulb.
+Insert a new bulb of the same type.
+Turn on power to test.
+Done!

@@ -1,0 +1,7 @@
+App-Related Issues:
+
+Ensure your smartphone has the latest version of the app.
+Log out and log back into the app.
+Reinstall the app if problems persist.
+
+Done!

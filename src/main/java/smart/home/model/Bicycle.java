@@ -48,13 +48,5 @@ public class Bicycle extends Device {
         }
     }
 
-    @Override
-    public void updateConsumption() {
 
-    }
-
-    @Override
-    public void getsBroken() {
-
-    }
 }

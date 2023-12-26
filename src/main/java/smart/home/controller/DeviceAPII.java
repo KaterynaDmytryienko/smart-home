@@ -1,6 +1,5 @@
 package smart.home.controller;
 
-import smart.home.SmartHouseSimulation;
 import smart.home.event.Event;
 import smart.home.model.Device;
 import smart.home.model.LightDevice;
@@ -8,14 +7,14 @@ import smart.home.model.LightDevice;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class DeviceApiImpl<T extends Device> implements DeviceAPI<T>{
+public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
     // rates for each utility
     private static final double ELECTRICITY_RATE = 0.12;
     private static final double GAS_RATE = 1.50;
     private static final double WATER_RATE = 0.05;
     List<Device.ConsumptionRecord> consumptionRecords;
     //////
-    private static final Logger LOGGER = Logger.getLogger(DeviceApiImpl.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DeviceAPII.class.getName());
 
     @Override
     public void turnOn(Event event, T device) {

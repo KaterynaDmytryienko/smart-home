@@ -29,11 +29,6 @@ public class Car extends Device{
 
     @Override
     public void update(Event event) {
-//        ConsumptionRecord latestRecord = this.getLatestConsumptionRecord();
-//        if (latestRecord != null && latestRecord.getFunctionality() <= 0&&event.getDevice()==this) {
-//            Logger logger = Logger.getLogger(PersonActivity.class.getName());
-//            logger.info(this.getName(this)+ " is broken!");
-//        }
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
             Logger logger = Logger.getLogger(Car.class.getName());
             logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
@@ -44,13 +39,4 @@ public class Car extends Device{
 
     }
 
-    @Override
-    public void updateConsumption() {
-
-    }
-
-    @Override
-    public void getsBroken() {
-
-    }
 }

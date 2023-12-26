@@ -1,0 +1,7 @@
+Issue: Not Cooling
+Solution:
+Check thermostat settings.
+Clean condenser coils.
+Ensure proper ventilation around the fridge.
+If problems persist, consult a technician.
+Done!

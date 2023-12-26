@@ -18,26 +18,12 @@ public class Fridge extends Device{
         setOffConsumption(offConsumption);
         Consumption idleConsumption=new Consumption(300,0,200);
         setIdleConsumption(idleConsumption);
-//        setActiveConsumption(400);
-//        setOffConsumption(100);
-//        setIdleConsumption(200);
+
         this.setCurrentState(DeviceState.IDLE);
     }
 
     @Override
-    public void updateConsumption() {
-
-    }
-
-    @Override
-    public void getsBroken() {
-        // Event event=new Event();
-    }
-    @Override
     public void update(Event event) {
-//        ConsumptionRecord latestRecord = this.getLatestConsumptionRecord();
-//        if (latestRecord != null && latestRecord.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
-
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
             Logger logger = Logger.getLogger(Fridge.class.getName());
             logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");

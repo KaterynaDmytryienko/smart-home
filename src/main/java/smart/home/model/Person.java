@@ -1,6 +1,6 @@
 package smart.home.model;
 
-import smart.home.util.Documentation;
+import smart.home.util.documentation.Documentation;
 
 public class Person extends Entity{
     private String gender;

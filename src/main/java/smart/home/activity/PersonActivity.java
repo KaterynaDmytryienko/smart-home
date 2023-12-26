@@ -53,27 +53,37 @@ public class PersonActivity implements Activity{
 //    }
     public void fixDevice(Person person,Device device) {
         if (device != null) {
-            LOGGER.info(person.getName() + " fixing the " + device.getName(device));
-            // LOGGER.info(device.getDocumentation().getDocumentationManual());
-            //  device.setPerformance(10);
-//            Device.ConsumptionRecord latestRecord = device.getLatestConsumptionRecord();
-//            latestRecord.setFunctionality(100);
+            LOGGER.info(person.getName() + " wants to fix the " + device.getName(device));
+            LOGGER.info("Reading Manual:...\n..."
+                    +device.getDocumentation().getDocumentationManual());
+            LOGGER.info(device.getName(device)+" was fixed!");
             device.setFunctionality(100);
+            device.setCurrentState(Device.DeviceState.IDLE);
         }
     }
 
     public void helpTheChild(Person person){
 
-        LOGGER.info("Helping the child..." + person.getName());
+        LOGGER.info(person.getName()+" is helping the child..." );
     }
 
-    public void eat(Person person){
+    public void eat(Person person,Person selectedToWait){
+
         LOGGER.info(person.getName()+" is eating.");
+        if(selectedToWait!=null){
+            LOGGER.info(selectedToWait.getName()+" is waiting on "+person.getName()+ " to finish eating.");
+
+        }
         for(Device d: house.getDevices()){
             if(d instanceof Fridge){
                 d.addUser(person.getName());
+                d.setCurrentState(Device.DeviceState.ACTIVE);
                 break;
             }
+        }
+        LOGGER.info(person.getName()+" finished eating.");
+        if(selectedToWait!=null){
+            eat(selectedToWait,null);
         }
     }
 
@@ -82,12 +92,13 @@ public class PersonActivity implements Activity{
         for(Device d: house.getDevices()){
             if(d instanceof Fridge){
                 d.addUser(person.getName());
+                d.setCurrentState(Device.DeviceState.ACTIVE);
                 break;
             }
         }
     }
     public void play(Person person){
-        LOGGER.info("Playing..."+person.getName());
+        LOGGER.info(person.getName()+" is playing...");
     }
     public void openFridge(Person person){
         LOGGER.info("Opening fridge..." + person.getName());
