@@ -1,0 +1,6 @@
+Issue: Speakers are not working.
+Solution:
+Check that the device is charged.
+Check bluetooth connection with the device.
+Try turning on again.
+Done!

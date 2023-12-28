@@ -1,0 +1,6 @@
+Issue: Multicooker is not turning on.
+Solution:
+Check that the device is properly plugged in.
+Check the wire contact with the multicooker connector.
+Try turning on again.
+Done!

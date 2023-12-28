@@ -27,6 +27,7 @@ public class EventGenerator {
         if (rand.nextBoolean()){
             event=animalActivity.doSomething();
         }
+//        event.setType(Even_Types.CLEAN);
 //       events.add(event);
         eventManager.handleEvent(event);
 

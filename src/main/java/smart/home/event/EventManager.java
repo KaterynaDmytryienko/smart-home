@@ -25,8 +25,9 @@ public class EventManager{
     public EventManager(){
         EventHandler deviceHandler = new DeviceHandler(this);
         EventHandler personHandler = new PersonHandler(this);
-
+        EventHandler animalHandler=new AnimalHandler(this);
         deviceHandler.assignToNext(personHandler);
+        personHandler.assignToNext(animalHandler);
 
         this.firstHandler = deviceHandler;
     }
@@ -40,7 +41,7 @@ public class EventManager{
 
     protected void alertObservers(Event event) {
         for (Observer observer : observers) {
-              if(observer!=null) observer.update(event);
+              if(observer!=null &&!event.isHandled) observer.update(event);
 
         }
     }

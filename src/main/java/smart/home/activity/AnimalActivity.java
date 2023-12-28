@@ -26,11 +26,13 @@ public class AnimalActivity implements Activity{
 //             return exitTheRoom(House.getHouse().getFloors().get(0).getRooms().get(0), people.get(0));
 //         }
 
-        Even_Types[] events = Even_Types.values();
-        int min = 3;
-        int max = 6; // Since the upper bound is exclusive, set this to 7-1
-        int range = max - min + 1;
-        int eventIndex = rand.nextInt(range) + min;
+    Even_Types[] events = Even_Types.values();
+    int min = 14;  // Index of ENTER_ROOM
+    int max = 18;
+
+    // Since we want to include ANIMAL_HUNGRY, we add 1 to max before subtracting min
+    int range = max - min + 1;
+    int eventIndex = rand.nextInt(range) + min;
         List<Floor>floors = house.getFloors();
         int floorIndex = rand.nextInt(floors.size());
 
@@ -39,7 +41,15 @@ public class AnimalActivity implements Activity{
 
         return new Event(events[eventIndex],selectedAnimal,rooms.get(roomIndex));
 
+    }
+    public Item getRandomItem(){
+        Random rand = new Random();
+        Item selectedItem = house.getItems().get((rand.nextInt(house.getItems().size())));
+        return selectedItem;
+    }
 
+    public void play(Entity animal){
+        System.out.println(animal.getName()+" is playing with "+getRandomItem().getType());
 
     }
 }

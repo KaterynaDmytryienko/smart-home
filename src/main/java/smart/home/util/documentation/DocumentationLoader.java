@@ -19,6 +19,13 @@ public class DocumentationLoader {
         {    documentationFilePath = "skisManual.txt";
         }else if(device instanceof VacuumCleaner)
         {    documentationFilePath = "vacuumCleanerManual.txt";
+        } else if (device instanceof Treadmill) {
+            documentationFilePath = "treadmillManual.txt";
+        } else if (device instanceof Multicooker) {
+            documentationFilePath = "multicookerManual.txt";
+        }
+        else if(device instanceof Speakers){
+            documentationFilePath = "speakersManual.txt";
         }
 
         return new Documentation(documentationFilePath);

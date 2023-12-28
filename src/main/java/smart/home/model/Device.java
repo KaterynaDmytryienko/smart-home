@@ -185,7 +185,7 @@ public abstract class Device implements Observer {
 
         long currentTime = System.currentTimeMillis();
         consumptionHistory.add(new ConsumptionRecord(currentElectricityConsumption, currentGasConsumption, currentWaterConsumption, functionality, currentTime));
-
+        setCurrentState(DeviceState.IDLE);
         // functionality decreases linearly over time
         functionality--;
     }
@@ -220,8 +220,20 @@ public abstract class Device implements Observer {
         }else if(device instanceof Car){
             String documentationFilePath = "path.txt";
             return "Car";
+        } else if (device instanceof PetFeeder) {
+            return "Pet Feeder";
+        } else if (device instanceof Treadmill) {
+            return "Treadmill";
         }
-
+        else if(device instanceof Multicooker){
+            return "Multicooker";
+        }
+        else if(device instanceof Speakers){
+            return "Speakers";
+        }
+        else if(device instanceof VacuumCleaner){
+            return "Vacuum cleaner";
+        }
         return null;
     }
 
