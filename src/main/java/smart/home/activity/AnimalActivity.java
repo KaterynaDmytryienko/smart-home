@@ -16,15 +16,10 @@ public class AnimalActivity implements Activity{
         return animals;
     }
 @Override
-    public Event doSomething(){
+    public Event doSomething(boolean sportEvent){
         Random rand = new Random();
         Animal selectedAnimal = animals.get(rand.nextInt(animals.size()));
 
-//         if (rand.nextBoolean()) {
-//             return enterTheRoom(House.getHouse().getFloors().get(0).getRooms().get(0), people.get(0));
-//         } else {
-//             return exitTheRoom(House.getHouse().getFloors().get(0).getRooms().get(0), people.get(0));
-//         }
 
     Even_Types[] events = Even_Types.values();
     int min = 14;  // Index of ENTER_ROOM

@@ -105,8 +105,6 @@ public class HouseConfig {
         //assigning lists to house
         house.setAnimals(animalsConfig1);
         house.setPeople(peopleConfig1);
-//        house.setDevices(devicesConfig1);
-//        house.setSensors(sensorsConfig1);
         house.setItems(itemsConfig1);
         house.setFloors(houseFloors);
     }

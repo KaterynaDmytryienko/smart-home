@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 public class Speakers extends Device{
     public Speakers() {
         super();
-        Consumption activeConsumption=new Consumption(100,0,0);
+        Consumption activeConsumption=new Consumption(127,0,0);
         setActiveConsumption(activeConsumption);
         Consumption offConsumption=new Consumption(0,0,0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(20,0,0);
+        Consumption idleConsumption=new Consumption(32,0,0);
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.IDLE);
     }

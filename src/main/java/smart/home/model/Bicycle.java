@@ -11,11 +11,11 @@ public class Bicycle extends Device {
 
     public Bicycle() {
         super();
-        Consumption activeConsumption=new Consumption(400,300,100);
+        Consumption activeConsumption=new Consumption(400,0,127);
         setActiveConsumption(activeConsumption);
         Consumption offConsumption=new Consumption(200,0,0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(300,0,200);
+        Consumption idleConsumption=new Consumption(300,0,100);
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.ACTIVE);
     }
@@ -31,20 +31,9 @@ public class Bicycle extends Device {
     @Override
     public void update(Event event) {
 
-//        ConsumptionRecord latestRecord = this.getLatestConsumptionRecord();
-//        if (latestRecord != null && latestRecord.getFunctionality() <= 0&&event.getDevice()==this) {
-//            Logger logger = Logger.getLogger(PersonActivity.class.getName());
-//            logger.info(this.getName(this)+ " is broken!");
-////            if(event.getSource() instanceof Person){
-////                personActivity.fixDevice((Person) event.getSource(),this);
-////            }
-//        }
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
             Logger logger = Logger.getLogger(Bicycle.class.getName());
             logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
-//            if(event.getSource() instanceof Person){
-//                personActivity.fixDevice((Person) event.getSource(),this);
-//            }
         }
     }
 

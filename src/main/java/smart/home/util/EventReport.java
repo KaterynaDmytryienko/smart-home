@@ -39,11 +39,6 @@ public class EventReport extends Report{
             }
 
         }
-
-//        for(String s : eventManager.getHandledEventsList()){
-//            reportBuilder.append(s+"\n");
-//        }
-
         return reportBuilder.toString();
     }
 }

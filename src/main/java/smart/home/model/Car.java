@@ -32,9 +32,7 @@ public class Car extends Device{
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
             Logger logger = Logger.getLogger(Car.class.getName());
             logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
-//            if(event.getSource() instanceof Person){
-//                personActivity.fixDevice((Person) event.getSource(),this);
-//            }
+
         }
 
     }

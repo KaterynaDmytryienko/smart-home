@@ -1,10 +1,12 @@
 package smart.home.controller;
 
 import smart.home.activity.PersonActivity;
+import smart.home.event.EventGenerator;
 import smart.home.event.EventManager;
 import smart.home.model.*;
 
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SmartHouseAPI {
@@ -16,6 +18,36 @@ public class SmartHouseAPI {
 
 
 House house = House.getHouse();
+
+    public void startSimulation(EventGenerator eventGenerator){
+        final long startTime = 6;
+        final long endTime = 18;
+        long currentTime = startTime;
+
+        final long simulationSpeed = 1; // Speed factor (10x, 100x, etc.)
+
+        while (currentTime < endTime){
+            if(currentTime == 6){
+                openBlinds();
+            }
+            if(currentTime == 17){
+                closeBlinds();
+            }
+            LOGGER.log(Level.INFO,"Simulated time: " +  currentTime + ":00");
+            //rand event generated
+            eventGenerator.generateEvent();
+
+            //update device consumption
+            collectDeviceData();
+            updatePerformance();
+            currentTime += 1 * simulationSpeed;
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 public void subscribeDevices(){
 
@@ -43,18 +75,22 @@ public void subscribeDevices(){
 
 
     public void collectDeviceData() {
+        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
         for(Device d: house.getDevices()){
-            d.recordConsumption();
+//            d.recordConsumption();
+            deviceAPI.recordConsumption(d);
         }
     }
     public void updatePerformance(){
+        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
         Random rand = new Random();
         int devIndex= rand.nextInt(house.getDevices().size());
 
         for(Device d: house.getDevices()){
             if(rand.nextBoolean()){
                 //pick random ones
-                d.downgradePerformance();
+//                d.downgradePerformance();
+                deviceAPI.performActionByState(d);
                 break;
             }
 

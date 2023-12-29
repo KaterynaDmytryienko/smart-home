@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 public class VacuumCleaner extends Device{
     public VacuumCleaner() {
         super();
-        Consumption activeConsumption=new Consumption(400,0,10);
+        Consumption activeConsumption=new Consumption(240,0,150);
         setActiveConsumption(activeConsumption);
         Consumption offConsumption=new Consumption(0,0,0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(90,0,0);
+        Consumption idleConsumption=new Consumption(90,0,10);
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.IDLE);
     }

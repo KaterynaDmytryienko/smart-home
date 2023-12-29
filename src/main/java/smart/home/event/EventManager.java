@@ -41,7 +41,7 @@ public class EventManager{
 
     protected void alertObservers(Event event) {
         for (Observer observer : observers) {
-              if(observer!=null &&!event.isHandled) observer.update(event);
+              if(!event.isHandled&&observer!=null) observer.update(event);
 
         }
     }

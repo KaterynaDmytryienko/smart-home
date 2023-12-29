@@ -20,25 +20,19 @@ public class PersonActivity implements Activity{
         return people;
     }
 @Override
-    public Event doSomething(){
+    public Event doSomething(boolean sportEvent){
          Random rand = new Random();
          Person selectedPerson = people.get(rand.nextInt(people.size()));
 
-//         if (rand.nextBoolean()) {
-//             return enterTheRoom(House.getHouse().getFloors().get(0).getRooms().get(0), people.get(0));
-//         } else {
-//             return exitTheRoom(House.getHouse().getFloors().get(0).getRooms().get(0), people.get(0));
-//         }
-
-
     Even_Types[] events = Even_Types.values();
-    int min = 0;  // Index of ENTER_ROOM
-    int max = 14;
 
+    int min = 2;  // Index of ENTER_ROOM
+    int max = 14;
+    if(sportEvent){min=0;
+        max = 3;
+    }
     int range = max - min + 1;
     int eventIndex = rand.nextInt(range) + min;
-
-
 
          List<Floor>floors = house.getFloors();
          int floorIndex = rand.nextInt(floors.size());
@@ -50,14 +44,6 @@ public class PersonActivity implements Activity{
 
      }
 
-//     public Event enterTheRoom(Room room, Person person){
-//         System.out.println("Entered" + person.getName());
-//         return new Event(Even_Types.ENTER_ROOM, person, room);
-//     }
-//    public Event exitTheRoom(Room room, Person person){
-//        System.out.println("Exit" + person.getName());
-//        return new Event(Even_Types.FLOOD, person, room);
-//    }
     public void fixDevice(Person person,Device device) {
         if (device != null ) {
             LOGGER.info(person.getName() + " wants to fix the " + device.getName(device));
@@ -176,7 +162,7 @@ public class PersonActivity implements Activity{
         }
         LOGGER.info(person.getName()+" finished skiing.");
         if(selectedToWait!=null){
-            cookInMulticooker(selectedToWait,null);
+            ski(selectedToWait,null);
         }
     }
 
@@ -211,7 +197,7 @@ public class PersonActivity implements Activity{
         }
         LOGGER.info(person.getName()+" finished cycling.");
         if(selectedToWait!=null){
-            cookInMulticooker(selectedToWait,null);
+            cycle(selectedToWait,null);
         }
     }
 
@@ -219,6 +205,6 @@ public class PersonActivity implements Activity{
         LOGGER.info(person.getName()+" is calling mechanic while wiping the floor.");
     }
     public void handleHeat(Person person){
-        LOGGER.info(person.getName()+" is turning on AirConditioning");
+        LOGGER.info(person.getName()+" is opening a window");
     }
 }

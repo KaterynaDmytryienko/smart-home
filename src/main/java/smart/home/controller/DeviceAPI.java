@@ -7,6 +7,8 @@ public interface DeviceAPI<T extends Device> {
     public interface DeviceCollectDataAPI<Device>{
         public void collectData(Device device);
     }
+    public void performActionByState(T device);
+    public void recordConsumption(T device);
 
     public void turnOn(Event event, T device);
     public void turnOff(Event event, T device);

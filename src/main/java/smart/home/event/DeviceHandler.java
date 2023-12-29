@@ -20,28 +20,6 @@ public class DeviceHandler implements EventHandler{
             }else{
                 eventManager.addToEvents(event);
             }
-
-
-//        if (canHandleLightDevice(event)) {
-//
-////            eventManager.alertObservers(event);
-//        } else if (canHandleThermostat(event)) {
-//            // Handle with thermostat logic
-//        } else if (eventHandler != null) {
-//            eventHandler.handleEvent(event);
-//        }
-        //}
     }
 
-    private boolean canHandleLightDevice(Event event) {
-       if(event.getType() == Even_Types.ENTER_ROOM || event.getType() == Even_Types.EXIT_ROOM){
-           return true;
-       }
-       return false;
-    }
-
-    private boolean canHandleThermostat(Event event) {
-        // Logic to determine if a thermostat should handle the event
-        return false;
-    }
 }

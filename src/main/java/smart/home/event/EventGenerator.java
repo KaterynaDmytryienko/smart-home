@@ -12,7 +12,7 @@ public class EventGenerator {
     private EventManager eventManager;
     private PersonActivity personActivity;
     private AnimalActivity animalActivity;
-
+    private int counter = 0;
     public EventGenerator(EventManager eventManager) {
         this.eventManager = eventManager;
         personActivity = new PersonActivity();
@@ -22,15 +22,15 @@ public class EventGenerator {
 
     public void generateEvent(){
         Random rand = new Random();
-        Event event = personActivity.doSomething();
+        boolean generateSportEvent = (counter%2!=0);
+        Event event = personActivity.doSomething(generateSportEvent);
 
-        if (rand.nextBoolean()){
-            event=animalActivity.doSomething();
+        if (rand.nextBoolean()&&!generateSportEvent){
+            event=animalActivity.doSomething(generateSportEvent);
         }
-//        event.setType(Even_Types.CLEAN);
-//       events.add(event);
-        eventManager.handleEvent(event);
 
+        eventManager.handleEvent(event);
+        counter++;
     }
 
 

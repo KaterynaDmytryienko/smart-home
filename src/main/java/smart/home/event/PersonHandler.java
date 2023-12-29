@@ -8,7 +8,6 @@ import java.util.Queue;
 import java.util.Random;
 
 public class PersonHandler implements EventHandler {
-    Queue<Event>waitingToBeExecuted;
     private EventHandler eventHandler;
     private EventManager eventManager;
 
@@ -58,7 +57,7 @@ public class PersonHandler implements EventHandler {
 
             switch (event.getType()) {
                 case DEVICE_BREAKAGE:
-                    System.out.println("WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+                    selectedToWait=null;
                     personActivity.fixDevice(selectedPerson, event.getDevice());
                     if (event.getDevice() != null){
                         eventToArchive.setDevice(event.getDevice());
@@ -93,10 +92,6 @@ public class PersonHandler implements EventHandler {
                     break;
                 case USE_TREADMILL:
                     personActivity.useTreadmill(selectedPerson, selectedToWait);
-                    event.isHandled=true;
-                    break;
-                case COOK_IN_MULTICOOKER:
-                    personActivity.cookInMulticooker(selectedPerson, selectedToWait);
                     event.isHandled=true;
                     break;
                 case LISTEN_TO_MUSIC:

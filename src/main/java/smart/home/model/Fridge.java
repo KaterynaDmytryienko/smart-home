@@ -12,11 +12,11 @@ public class Fridge extends Device{
     List<Item> itemsList;
     public Fridge(){
         super();
-        Consumption activeConsumption=new Consumption(400,300,100);
+        Consumption activeConsumption=new Consumption(400,0,100);
         setActiveConsumption(activeConsumption);
-        Consumption offConsumption=new Consumption(200,0,0);
+        Consumption offConsumption=new Consumption(0,0,0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(300,0,200);
+        Consumption idleConsumption=new Consumption(200,0,50);
         setIdleConsumption(idleConsumption);
 
         this.setCurrentState(DeviceState.IDLE);
@@ -27,9 +27,6 @@ public class Fridge extends Device{
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
             Logger logger = Logger.getLogger(Fridge.class.getName());
             logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
-//            if(event.getSource() instanceof Person){
-//                personActivity.fixDevice((Person) event.getSource(),this);
-//            }
         }
     }
 }

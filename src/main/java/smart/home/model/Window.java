@@ -1,5 +1,5 @@
 package smart.home.model;
 
 public class Window {
-    private boolean blindsOpen = false;
+    private boolean isOpened = false;
 }

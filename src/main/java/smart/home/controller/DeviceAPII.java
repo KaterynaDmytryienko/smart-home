@@ -22,7 +22,6 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
 
            if(event.getRoom().getLightDevice().isTurnedOn()) LOGGER.info("Light is turned on in " + event.getRoom().getName());
         }
-        // Add logic for other types of devices if needed
     }
 
     @Override
@@ -81,5 +80,15 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
 
         return totalElectricityCost + totalGasCost + totalWaterCost;
     }
+@Override
+    public void performActionByState(T device){
+        device.downgradePerformance();
+    }
+
+    @Override
+    public void recordConsumption(T device) {
+        device.recordConsumption();
+    }
+
 
 }

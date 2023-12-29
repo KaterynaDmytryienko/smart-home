@@ -26,27 +26,27 @@ public class ConsumptionReport extends Report{
 
             double elct=deviceAPI.getTotalElectricityConsumption(device);
             totalElectricity+=elct;
-            reportBuilder.append("Electricity:").append(elct + " kWh");
+            reportBuilder.append("Electricity:").append(String.format("%.2f",elct) + " kWh");
 
             double gas=deviceAPI.getTotalGasConsumption(device);
             totalGas+=gas;
-            reportBuilder.append("\t\tGas:").append(gas+" cubic meters");
+            reportBuilder.append("\t\tGas:").append( String.format("%.2f",gas)+" cubic meters");
 
             double wtr=deviceAPI.getTotalWaterConsumption(device);
             totalWater+=wtr;
-            reportBuilder.append("\t\tWater:").append(wtr+" gallons");
+            reportBuilder.append("\t\tWater:").append( String.format("%.2f",wtr)+" gallons");
 
             double cost=deviceAPI.getFinancialCost(device);
             totalCost+=cost;
-            reportBuilder.append("\nTotal daily financial cost: ").append(cost+" $$$");
+            reportBuilder.append("\nTotal daily financial cost: ").append( String.format("%.2f",cost)+" $$$");
 
         }
 
         reportBuilder.append("\n\n\tOVERALL DAILY USAGE\n");
-        reportBuilder.append("Electricity: ").append(totalElectricity + " kWh");
-        reportBuilder.append("\t\tGas: ").append(totalGas+" cubic meters");
-        reportBuilder.append("\t\tWater: ").append(totalWater+" gallons");
-        reportBuilder.append("\nTotal daily financial cost: ").append(totalCost+" $$$");
+        reportBuilder.append("Electricity: ").append( String.format("%.2f",totalElectricity) + " kWh");
+        reportBuilder.append("\t\tGas: ").append( String.format("%.2f",totalGas)+" cubic meters");
+        reportBuilder.append("\t\tWater: ").append( String.format("%.2f",totalWater)+" gallons");
+        reportBuilder.append("\nTotal daily financial cost: ").append( String.format("%.2f",totalCost)+" $$$");
 
 
         return reportBuilder.toString();

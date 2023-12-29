@@ -1,6 +1,4 @@
 Issue: Treadmill is not working
 Solution:
-Check the battery for charge.
-Inspect spark plugs for wear.
-Examine fuel levels.
+Check if the device is plugged in.
 Done!
