@@ -2,7 +2,13 @@ package smart.home.util;
 
 import smart.home.model.*;
 
+
 public class HouseConfigurationReport extends Report{
+
+    /**
+     * Method sets the format of report based on house configuration.
+     * @return String
+     */
     @Override
     protected String prepareReportContent() {
         House house = House.getHouse();

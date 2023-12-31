@@ -9,12 +9,17 @@ import java.util.Random;
 
 public class AnimalActivity implements Activity{
     private List<Animal> animals = House.getHouse().getAnimals();
-    boolean isBusy;
     House house = House.getHouse();
 
     public List<Animal> getAnimals() {
         return animals;
     }
+
+    /**
+     * Method generates random animal events on a random floor in a random room.
+     * @param sportEvent
+     * @return
+     */
 @Override
     public Event doSomething(boolean sportEvent){
         Random rand = new Random();
@@ -25,7 +30,6 @@ public class AnimalActivity implements Activity{
     int min = 14;  // Index of ENTER_ROOM
     int max = 18;
 
-    // Since we want to include ANIMAL_HUNGRY, we add 1 to max before subtracting min
     int range = max - min + 1;
     int eventIndex = rand.nextInt(range) + min;
         List<Floor>floors = house.getFloors();
@@ -37,12 +41,21 @@ public class AnimalActivity implements Activity{
         return new Event(events[eventIndex],selectedAnimal,rooms.get(roomIndex));
 
     }
+
+    /**
+     * Method returns randomly chosen item.
+     * @return Item
+     */
     public Item getRandomItem(){
         Random rand = new Random();
         Item selectedItem = house.getItems().get((rand.nextInt(house.getItems().size())));
         return selectedItem;
     }
 
+    /**
+     * Method allows an animal to play with a randomly chosen item.
+     * @param animal
+     */
     public void play(Entity animal){
         System.out.println(animal.getName()+" is playing with "+getRandomItem().getType());
 

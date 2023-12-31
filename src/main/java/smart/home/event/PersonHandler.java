@@ -22,6 +22,10 @@ public class PersonHandler implements EventHandler {
         this.eventHandler = eventHandler;
     }
 
+    /**
+     * Method sets the way how person would react to the event based on age, ect.
+     * @param event
+     */
     @Override
     public void handleEvent(Event event) {
         Person selectedPerson = null;
@@ -67,14 +71,6 @@ public class PersonHandler implements EventHandler {
                     break;
                 case BABY_SCREAM:
                     personActivity.helpTheChild(selectedPerson);
-                    event.isHandled=true;
-                    break;
-                case FLOOD:
-                    personActivity.handleFlood(selectedPerson);
-                    event.isHandled=true;
-                    break;
-                case HEAT:
-                    personActivity.handleHeat(selectedPerson);
                     event.isHandled=true;
                     break;
                 case PERSON_HUNGRY:

@@ -1,5 +1,6 @@
 package smart.home.model;
 
+import org.slf4j.LoggerFactory;
 import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 
@@ -8,6 +9,7 @@ import java.util.logging.Logger;
 
 public class Car extends Device{
     private String type = "regular";
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Car.class);
 
     public Car() {  super();
         Consumption activeConsumption=new Consumption(400,300,100);
@@ -30,8 +32,7 @@ public class Car extends Device{
     @Override
     public void update(Event event) {
         if (this.getFunctionality() <= 0&&event.getDevice()==this&&event.getRoom()==this.getCurrentRoom()) {
-            Logger logger = Logger.getLogger(Car.class.getName());
-            logger.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
+            LOGGER.info(this.getName(this)+ " is broken in the "+event.getRoom().getName()+"!!!");
 
         }
 

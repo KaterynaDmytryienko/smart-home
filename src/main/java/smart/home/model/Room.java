@@ -17,6 +17,8 @@ public abstract class Room {
         setLightDevice(new LightDevice());
         setMotionSensor(new MotionSensor());
         setThermostatSensor(new ThermostatSensor());
+        setWindow(new Window());
+
         this.devices = devices;
     }
     public Room(){
@@ -32,6 +34,16 @@ public abstract class Room {
     private MotionSensor motionSensor;
     private LightDevice lightDevice;
     private ThermostatSensor thermostatSensor;
+
+    public Window getWindow() {
+        return window;
+    }
+
+    public void setWindow(Window window) {
+        this.window = window;
+    }
+
+    private Window window;
 
 
     public boolean isEmpty() {

@@ -15,16 +15,6 @@ public class Person extends Entity{
         this.hasDriveLicense = hasDriveLicense;
     }
 
-    public void accessDocumentation(Device device){
-        Documentation documentation=device.getDocumentation();
-        if(documentation!=null){
-
-        }else{
-
-        }
-
-    }
-
     public String getName() {
         return name;
     }

@@ -1,11 +1,13 @@
 package smart.home.model;
 
+import org.slf4j.LoggerFactory;
+import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 
 import java.util.logging.Logger;
 
 public class MotionSensor implements Sensor{
-    private static final Logger LOGGER = Logger.getLogger(MotionSensor.class.getName());
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MotionSensor.class);
 
     @Override
     public void update(Event event) {

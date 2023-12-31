@@ -9,6 +9,10 @@ public class ConsumptionReport extends Report{
     public ConsumptionReport() {
     }
 
+    /**
+     * Method sets the format of report based on the consumption.
+     * @return String
+     */
     @Override
     protected String prepareReportContent() {
 

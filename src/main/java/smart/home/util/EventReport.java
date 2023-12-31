@@ -16,6 +16,12 @@ public class EventReport extends Report{
         this.eventGenerator = eventGenerator;
         this.eventManager = eventManager;
     }
+
+
+    /**
+     * Method sets the format of report based on the events.
+     * @return String
+     */
     @Override
     protected String prepareReportContent() {
         List<Event>events = eventManager.getEvents();

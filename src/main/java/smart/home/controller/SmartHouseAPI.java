@@ -1,5 +1,7 @@
 package smart.home.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import smart.home.activity.PersonActivity;
 import smart.home.event.EventGenerator;
 import smart.home.event.EventManager;
@@ -7,10 +9,9 @@ import smart.home.model.*;
 
 import java.util.Random;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SmartHouseAPI {
-    private static final Logger LOGGER = Logger.getLogger(SmartHouseAPI.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SmartHouseAPI.class);
     EventManager eventManager;
     public SmartHouseAPI(EventManager eventManager) {
         this.eventManager = eventManager;
@@ -19,6 +20,10 @@ public class SmartHouseAPI {
 
 House house = House.getHouse();
 
+    /**
+     * Method sets simulation parameters(time, pauses).
+     * @param eventGenerator
+     */
     public void startSimulation(EventGenerator eventGenerator){
         final long startTime = 6;
         final long endTime = 18;
@@ -33,7 +38,7 @@ House house = House.getHouse();
             if(currentTime == 17){
                 closeBlinds();
             }
-            LOGGER.log(Level.INFO,"Simulated time: " +  currentTime + ":00");
+            LOGGER.info("Simulated time: " +  currentTime + ":00");
             //rand event generated
             eventGenerator.generateEvent();
 
@@ -49,6 +54,9 @@ House house = House.getHouse();
         }
     }
 
+    /**
+     * Method subscribes all devices as observers.
+     */
 public void subscribeDevices(){
 
     for(Floor floor : house.getFloors()){
@@ -74,10 +82,12 @@ public void subscribeDevices(){
 }
 
 
+    /**
+     * Method allows to collect device`s consumption.
+     */
     public void collectDeviceData() {
         DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
         for(Device d: house.getDevices()){
-//            d.recordConsumption();
             deviceAPI.recordConsumption(d);
         }
     }
@@ -97,10 +107,16 @@ public void subscribeDevices(){
         }
     }
 
+    /**
+     * Method allows to open blinds.
+     */
 public void openBlinds(){
     LOGGER.info("Blinds are open!");
 }
 
+    /**
+     * Method allows to close blinds.
+     */
     public void closeBlinds(){
         LOGGER.info("Blinds are closed!");
     }

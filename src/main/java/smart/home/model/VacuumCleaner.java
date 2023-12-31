@@ -1,12 +1,15 @@
 package smart.home.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import smart.home.activity.PersonActivity;
 import smart.home.event.Even_Types;
 import smart.home.event.Event;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class VacuumCleaner extends Device{
+    private static final Logger LOGGER = LoggerFactory.getLogger(VacuumCleaner.class);
     public VacuumCleaner() {
         super();
         Consumption activeConsumption=new Consumption(240,0,150);
@@ -17,6 +20,10 @@ public class VacuumCleaner extends Device{
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.IDLE);
     }
+
+    /**
+     * Method picks VacuumCleaner from a random room.
+     */
     public void getRandomDevice(){
         Random random = new Random();
         if (random.nextBoolean()) {
@@ -39,8 +46,7 @@ public class VacuumCleaner extends Device{
     @Override
     public void update(Event event) {
         if (this.getFunctionality() <= 0 && event.getDevice() == this && event.getRoom() == this.getCurrentRoom()) {
-            Logger logger = Logger.getLogger(VacuumCleaner.class.getName());
-            logger.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
+            LOGGER.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
         }
         if(event.getType() == Even_Types.CLEAN){
             System.out.println(event.getRoom().getName()+ " is currently being cleaned.");

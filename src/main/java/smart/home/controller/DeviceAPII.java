@@ -1,21 +1,26 @@
 package smart.home.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 import smart.home.model.Device;
 import smart.home.model.LightDevice;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
-    // rates for each utility
     private static final double ELECTRICITY_RATE = 0.12;
     private static final double GAS_RATE = 1.50;
     private static final double WATER_RATE = 0.05;
     List<Device.ConsumptionRecord> consumptionRecords;
-    //////
-    private static final Logger LOGGER = Logger.getLogger(DeviceAPII.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeviceAPII.class);
 
+    /**
+     * Method turns on lights when Entity enters a room.
+     * @param event
+     * @param device
+     */
     @Override
     public void turnOn(Event event, T device) {
         if (device instanceof LightDevice) {
@@ -24,13 +29,16 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         }
     }
 
+    /**
+     * Method turns off lights when Entity leaves a room.
+     * @param event
+     * @param device
+     */
     @Override
     public void turnOff(Event event, T device) {
         if (device instanceof LightDevice) {
-           // ((LightDevice) device).setTurnedOn(false);
             if(!event.getRoom().getLightDevice().isTurnedOn()) LOGGER.info("Light is turned off in " + event.getRoom().getName());
         }
-        // Add logic for other types of devices if needed
     }
 
 
@@ -39,6 +47,11 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         consumptionRecords = device.getConsumptionHistory();
     }
 
+    /**
+     * Methods returns total electricity consumption as a double value.
+     * @param device
+     * @return double
+     */
     @Override
     public double getTotalElectricityConsumption(T device) {
         double totalElectricity = 0;
@@ -47,6 +60,12 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         }
         return totalElectricity;
     }
+
+    /**
+     * Methods returns total gas consumption as a double value.
+     * @param device
+     * @return double
+     */
 @Override
     public double getTotalGasConsumption(T device) {
         double totalGas = 0;
@@ -56,6 +75,11 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         return totalGas;
     }
 
+    /**
+     * Methods returns total water consumption as a double value.
+     * @param device
+     * @return double
+     */
     @Override
     public double getTotalWaterConsumption(T device) {
         double totalWater = 0;
@@ -64,6 +88,12 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         }
         return totalWater;
     }
+
+    /**
+     * Method returns total functionality value of a device.
+     * @param device
+     * @return double
+     */
     @Override
     public double getTotalFunctionality(T device) {
         double totalFunctionality = 0;
@@ -72,6 +102,12 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
         }
         return totalFunctionality;
     }
+
+    /**
+     * Method returns total financial cost of water, electricity and gas consumption.
+     * @param device
+     * @return double
+     */
     @Override
     public double getFinancialCost(T device) {
         double totalElectricityCost = getTotalElectricityConsumption(device) * ELECTRICITY_RATE;
@@ -80,11 +116,20 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
 
         return totalElectricityCost + totalGasCost + totalWaterCost;
     }
+
+    /**
+     * Method downgrade performance of a device.
+     * @param device
+     */
 @Override
     public void performActionByState(T device){
         device.downgradePerformance();
     }
 
+    /**
+     * Method records device consumption.
+     * @param device
+     */
     @Override
     public void recordConsumption(T device) {
         device.recordConsumption();

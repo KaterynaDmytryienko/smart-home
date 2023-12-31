@@ -8,7 +8,9 @@ import java.util.List;
 public class HouseConfig {
 
 
-    //FIRST HOUSE CONFIGURATION
+    /**
+     * Method defines first house configuration.
+     */
     public void setFirstHouseConfig(){
         House house=House.getHouse();
         // Set up the first configuration
@@ -31,8 +33,6 @@ public class HouseConfig {
             add(new Item(1, "feather"));
         }};
 
-        final LivingRoom livingRoom = new LivingRoom();
-        livingRoom.setEmpty(false);
 
         final List<Device>devices = new ArrayList<Device>(){{
          add(new Speakers());
@@ -72,10 +72,17 @@ public class HouseConfig {
             add(new Speakers());
         }};
 
+        final List<Device>devices7 = new ArrayList<Device>(){{
+            add(new Treadmill());
+            add(new PetFeeder());
+            add(new Speakers());
+        }};
+
+
         final Floor floor1 = new Floor(1);
         final Floor floor2 = new Floor(2);
         List<Room> roomsFloor1 = new ArrayList<Room>(){{
-            add(livingRoom);
+            add(new LivingRoom());
             add(new Bathroom(devices));
             add(new Kitchen(devices2));
             add(new BedRoom(devices3));
@@ -110,7 +117,9 @@ public class HouseConfig {
     }
 
 
-    //SECOND HOUSE CONFIGURATION
+    /**
+     * Method defines second house configuration.
+     */
     public static void setSecondHouseConfig() {
         House house = House.getHouse();
         List<Animal> animalsConfig2 =new ArrayList<Animal>(){{
@@ -165,10 +174,17 @@ public class HouseConfig {
         add(new Bicycle());
     }};
 
+        List<Device> devicesForLivingRoom = new ArrayList<Device>(){{
+            add(new Speakers());
+            add(new VacuumCleaner());
+            add(new Treadmill());
+        }};
+
     final Floor floor1 = new Floor(1);
     final Floor floor2 = new Floor(2);
 
     List<Room> roomsFloor1 = new ArrayList<Room>(){{
+        add(new LivingRoom(devicesForLivingRoom));
         add(new Bathroom(devicesForBathroom));
         add(new Kitchen(devicesForKitchen));
         add(new BedRoom(devicesForBedroom1));

@@ -17,6 +17,11 @@ public class ActivityAndUsageReport extends Report{
         this.eventGenerator = eventGenerator;
         this.eventManager = eventManager;
     }
+
+    /**
+     * Method sets the format of report based on the activity and usage.
+     * @return String
+     */
     @Override
     protected String prepareReportContent() {
         List<Event> events = eventManager.getEvents();

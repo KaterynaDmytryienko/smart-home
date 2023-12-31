@@ -1,17 +1,14 @@
-package smart.home.activity;
-
+package smart.home.activity;import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import smart.home.event.Even_Types;
 import smart.home.event.Event;
 import smart.home.model.*;
 
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class PersonActivity implements Activity{
-    private static final Logger LOGGER = Logger.getLogger(PersonActivity.class.getName());
-
-    boolean isBusy;
+private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.class);
     House house = House.getHouse();
 
     private List<Person>people = house.getPeople();
@@ -19,6 +16,13 @@ public class PersonActivity implements Activity{
     public List<Person> getPeople() {
         return people;
     }
+
+    /**
+     * Method generates random events on a random floor in a random room
+     * considering 50/50 ratio of sport and other events.
+     * @param sportEvent
+     * @return
+     */
 @Override
     public Event doSomething(boolean sportEvent){
          Random rand = new Random();
@@ -44,6 +48,11 @@ public class PersonActivity implements Activity{
 
      }
 
+    /**
+     * Method allows a person to fix a device, with the help of manual.
+     * @param person
+     * @param device
+     */
     public void fixDevice(Person person,Device device) {
         if (device != null ) {
             LOGGER.info(person.getName() + " wants to fix the " + device.getName(device));
@@ -55,11 +64,22 @@ public class PersonActivity implements Activity{
         }
     }
 
+    /**
+     * Method allows a person to help a child, if it is crying.
+     * @param person
+     */
     public void helpTheChild(Person person){
 
         LOGGER.info(person.getName()+" is helping the child..." );
     }
 
+    /**
+     * Method allows a person to eat and makes another person wait until the first person finishes eating.
+     * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
+     * to eat once the first person has finished.
+     * @param person
+     * @param selectedToWait
+     */
     public void eat(Person person,Person selectedToWait){
 
         LOGGER.info(person.getName()+" is eating.");
@@ -80,6 +100,10 @@ public class PersonActivity implements Activity{
         }
     }
 
+    /**
+     * Method allows a person to drink.
+     * @param person
+     */
     public void drink(Person person){
         LOGGER.info(person.getName()+" is drinking.");
         for(Device d: house.getDevices()){
@@ -90,13 +114,30 @@ public class PersonActivity implements Activity{
             }
         }
     }
+
+    /**
+     * Method allows a person to play.
+     * @param person
+     */
     public void play(Person person){
         LOGGER.info(person.getName()+" is playing...");
     }
+
+    /**
+     * Method allows a person to open a fridge.
+     * @param person
+     */
     public void openFridge(Person person){
         LOGGER.info("Opening fridge..." + person.getName());
     }
 
+    /**
+     * Method allows a person to use a treadmill.
+     * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
+     * to use a treadmill once the first person has finished.
+     * @param person
+     * @param selectedToWait
+     */
     public void useTreadmill(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is using a treadmill.");
         if(selectedToWait!=null){
@@ -135,6 +176,10 @@ public class PersonActivity implements Activity{
         }
     }
 
+    /**
+     * Method allows a person to listen to music.
+     * @param person
+     */
     public void listenToMusic(Person person){
         LOGGER.info(person.getName()+" is listening to the music via speakers.");
         for(Device d: house.getDevices()){
@@ -147,6 +192,13 @@ public class PersonActivity implements Activity{
         LOGGER.info(person.getName()+" finished listening to music.");
     }
 
+    /**
+     * Method allows a person to ski.
+     * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
+     * to ski once the first person has finished.
+     * @param person
+     * @param selectedToWait
+     */
     public void ski(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is skiing.");
         if(selectedToWait!=null){
@@ -166,22 +218,42 @@ public class PersonActivity implements Activity{
         }
     }
 
+    /**
+     * Method allows a person who has driving license to drive.
+     * If the person does not have a driving license, warning will be shown.
+     * @param person
+     */
     public void drive(Person person){
-        LOGGER.info(person.getName()+" is driving.");
-        for(Device d: house.getDevices()){
-            if(d instanceof Car){
-                d.addUser(person.getName());
-                d.setCurrentState(Device.DeviceState.ACTIVE);
-                break;
+        if(person.isHasDriveLicense()){
+            LOGGER.info(person.getName()+" is driving.");
+            for(Device d: house.getDevices()){
+                if(d instanceof Car){
+                    d.addUser(person.getName());
+                    d.setCurrentState(Device.DeviceState.ACTIVE);
+                    break;
+                }
             }
+            LOGGER.info(person.getName()+" finished driving.");
         }
-        LOGGER.info(person.getName()+" finished driving.");
+       else {LOGGER.warn(person.getName()+" who does not have driving license trying to use a car!");}
     }
 
+    /**
+     * Method allows a person to workout.
+     * @param person
+     */
     public void workout(Person person){
         LOGGER.info(person.getName()+" is working out.");
         LOGGER.info(person.getName()+" finished working out.");
     }
+
+    /**
+     * Method allows a person to cycle.
+     * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
+     * to cycle once the first person has finished.
+     * @param person
+     * @param selectedToWait
+     */
     public void cycle(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is cycling.");
         if(selectedToWait!=null){
@@ -201,10 +273,11 @@ public class PersonActivity implements Activity{
         }
     }
 
-    public void handleFlood(Person person){
-        LOGGER.info(person.getName()+" is calling mechanic while wiping the floor.");
-    }
-    public void handleHeat(Person person){
-        LOGGER.info(person.getName()+" is opening a window");
-    }
+//    public void handleFlood(Person person){
+//        LOGGER.info(person.getName()+" is calling mechanic while wiping the floor.");
+//    }
+//    public void handleHeat(Person person, Room room){
+//        room.getWindow().setOpened(true);
+//        LOGGER.info(person.getName()+" is opening a window in "+room.getName());
+//    }
 }

@@ -14,8 +14,6 @@ public abstract class Device implements Observer {
         private int gasConsumption;
         private int waterConsumption;
 
-        // Constructors, getters, setters, etc.
-
         public Consumption(int electricityConsumption, int gasConsumption, int waterConsumption) {
             this.electricityConsumption = electricityConsumption;
             this.gasConsumption = gasConsumption;
@@ -146,6 +144,10 @@ public abstract class Device implements Observer {
         return consumptionHistory;
     }
 
+    /**
+     * Method gets room where current device is located.
+     * @return Room
+     */
  public Room getCurrentRoom(){
       for(Floor floor:house.getFloors()){
           for(Room room: floor.getRooms()){
@@ -192,33 +194,23 @@ public abstract class Device implements Observer {
 
     private Documentation documentation;
 
-    public void setPerformance(int performance) {
-        this.performance = performance;
-    }
-
-    public int getPerformance() {
-        return performance;
-    }
-
-    private int performance =10;
-
-
     public Device() {
         this.documentation = null;
     }
 
+    /**
+     * Method returns current device name.
+     * @param device
+     * @return String deviceName
+     */
     public String getName(Device device) {
         if(device instanceof LightDevice){
-            String documentationFilePath = "path.txt";
             return "LightDevice";
         }else if(device instanceof Fridge){
-            String documentationFilePath = "path.txt";
             return "Fridge";
         }else if(device instanceof Bicycle){
-            String documentationFilePath = "path.txt";
             return "Bicycle";
         }else if(device instanceof Car){
-            String documentationFilePath = "path.txt";
             return "Car";
         } else if (device instanceof PetFeeder) {
             return "Pet Feeder";
@@ -243,6 +235,11 @@ public abstract class Device implements Observer {
         }
         return documentation;
     }
+
+    /**
+     * Method allows to downgrade performance by a random value
+     * and generates DEVICE_BREAKAGE event if device`s functionality reaches 0 or less.
+     */
     public void downgradePerformance(){
         Random rand = new Random();
         int eventIndex = rand.nextInt(6)+3;

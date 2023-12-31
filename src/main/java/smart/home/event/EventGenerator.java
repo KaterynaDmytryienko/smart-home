@@ -20,6 +20,9 @@ public class EventGenerator {
     }
 
 
+    /**
+     * Method generates random events (50% - sport events, 50% - regular events).
+     */
     public void generateEvent(){
         Random rand = new Random();
         boolean generateSportEvent = (counter%2!=0);

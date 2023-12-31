@@ -1,11 +1,14 @@
 package smart.home.model;
 
+import org.slf4j.LoggerFactory;
+import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 
 import java.util.Random;
 import java.util.logging.Logger;
 
 public class PetFeeder extends Device{
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PetFeeder.class);
     House house = House.getHouse();
     public PetFeeder() {
         super();
@@ -18,6 +21,10 @@ public class PetFeeder extends Device{
         this.setCurrentState(DeviceState.IDLE);
     }
 
+    /**
+     * Method picks PetFeeder from a random room and assigns pet that has used it.
+     * @param animalName
+     */
     public void getRandomDevice(String animalName){
         Random random = new Random();
         if (random.nextBoolean()) {
@@ -43,8 +50,7 @@ public class PetFeeder extends Device{
     @Override
     public void update(Event event) {
         if (this.getFunctionality() <= 0 && event.getDevice() == this && event.getRoom() == this.getCurrentRoom()) {
-            Logger logger = Logger.getLogger(PetFeeder.class.getName());
-            logger.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
+            LOGGER.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
         }
 
         switch (event.getType()){
