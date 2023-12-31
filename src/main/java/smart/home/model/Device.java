@@ -229,6 +229,9 @@ public abstract class Device implements Observer {
         return null;
     }
 
+    /**
+     * @return pulls up documentation when it's needed (if it wasn't loaded yet)
+     */
     public Documentation getDocumentation(){
         if(documentation==null){
             documentation=DocumentationLoader.loadDocumentation(this);

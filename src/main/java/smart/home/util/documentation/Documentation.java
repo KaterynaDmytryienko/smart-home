@@ -16,6 +16,10 @@ public class Documentation {
     String getDocumentationFilePath(){
         return documentationFilePath;
     };
+
+    /**
+     * @return loads instructions from file using documentationFilePath
+     */
     public String getDocumentationManual() {
         try (InputStream inputStream = Documentation.class.getResourceAsStream("/" + documentationFilePath);
              Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {

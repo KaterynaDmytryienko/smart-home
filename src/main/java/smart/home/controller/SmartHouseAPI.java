@@ -115,7 +115,7 @@ public void openBlinds(){
 }
 
     /**
-     * Method allows to close blinds.
+     * Method allows to close blinds .
      */
     public void closeBlinds(){
         LOGGER.info("Blinds are closed!");

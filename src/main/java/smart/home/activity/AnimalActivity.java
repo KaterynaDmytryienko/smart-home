@@ -53,7 +53,7 @@ public class AnimalActivity implements Activity{
     }
 
     /**
-     * Method allows an animal to play with a randomly chosen item.
+     * Method allows an animal to play with chosen item.
      * @param animal
      */
     public void play(Entity animal){

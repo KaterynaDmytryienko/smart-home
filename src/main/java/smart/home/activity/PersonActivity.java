@@ -49,7 +49,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
      }
 
     /**
-     * Method allows a person to fix a device, with the help of manual.
+     * Method allows a person to fix a device, with the help of a manual.
      * @param person
      * @param device
      */

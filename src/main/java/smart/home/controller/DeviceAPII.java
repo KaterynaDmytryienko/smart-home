@@ -118,7 +118,7 @@ public class DeviceAPII<T extends Device> implements DeviceAPI<T>{
     }
 
     /**
-     * Method downgrade performance of a device.
+     * Method downgrades performance of a device.
      * @param device
      */
 @Override

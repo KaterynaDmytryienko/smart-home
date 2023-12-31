@@ -45,6 +45,11 @@ public class EventManager{
 
         }
     }
+
+    /**
+     * Method archives event in order to track history for reports.
+     * @param event
+     */
     public void addToEvents(Event event){
         events.add(event);
     }
