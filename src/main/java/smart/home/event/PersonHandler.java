@@ -67,7 +67,6 @@ public class PersonHandler implements EventHandler {
                         eventToArchive.setDevice(event.getDevice());
                         event.isHandled=true;
                     }
-
                     break;
                 case BABY_SCREAM:
                     personActivity.helpTheChild(selectedPerson);

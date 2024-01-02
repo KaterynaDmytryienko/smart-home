@@ -12,6 +12,10 @@ public class DeviceHandler implements EventHandler{
         this.eventHandler = eventHandler;
     }
 
+    /**
+     * Method allows to handle an event.
+     * @param event
+     */
     @Override
     public void handleEvent(Event event) {
         eventManager.alertObservers(event);

@@ -91,6 +91,10 @@ public void subscribeDevices(){
             deviceAPI.recordConsumption(d);
         }
     }
+
+    /**
+     * Method randomly updates performance of a device.
+     */
     public void updatePerformance(){
         DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
         Random rand = new Random();
@@ -99,7 +103,6 @@ public void subscribeDevices(){
         for(Device d: house.getDevices()){
             if(rand.nextBoolean()){
                 //pick random ones
-//                d.downgradePerformance();
                 deviceAPI.performActionByState(d);
                 break;
             }

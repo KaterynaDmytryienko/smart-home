@@ -157,25 +157,6 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
         }
     }
 
-    public void cookInMulticooker(Person person, Person selectedToWait){
-        LOGGER.info(person.getName()+" is cooking in a multicooker.");
-        if(selectedToWait!=null){
-            LOGGER.info(selectedToWait.getName()+" is waiting on "+person.getName()+ " to finish cooking in a multicooker.");
-
-        }
-        for(Device d: house.getDevices()){
-            if(d instanceof Multicooker){
-                d.addUser(person.getName());
-                d.setCurrentState(Device.DeviceState.ACTIVE);
-                break;
-            }
-        }
-        LOGGER.info(person.getName()+" finished using multicooker.");
-        if(selectedToWait!=null){
-            cookInMulticooker(selectedToWait,null);
-        }
-    }
-
     /**
      * Method allows a person to listen to music.
      * @param person
@@ -272,12 +253,4 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
             cycle(selectedToWait,null);
         }
     }
-
-//    public void handleFlood(Person person){
-//        LOGGER.info(person.getName()+" is calling mechanic while wiping the floor.");
-//    }
-//    public void handleHeat(Person person, Room room){
-//        room.getWindow().setOpened(true);
-//        LOGGER.info(person.getName()+" is opening a window in "+room.getName());
-//    }
 }
