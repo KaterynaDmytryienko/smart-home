@@ -48,7 +48,7 @@ public class SmartHouseAPI {
         EventGenerator eventGenerator = new EventGenerator(eventManager);
         house.setEventManager(eventManager);
         setStartTime(6);
-        setEndTime(17);
+        setEndTime(18);
         long currentTime = startTime;
 
         final long simulationSpeed = 1; // Speed factor (10x, 100x, etc.)
@@ -57,7 +57,7 @@ public class SmartHouseAPI {
             if (currentTime == getStartTime()) {
                 openBlinds();
             }
-            if (currentTime == getEndTime()) {
+            if (currentTime == getEndTime()-1) {
                 closeBlinds();
             }
             LOGGER.info("Simulated time: " + currentTime + ":00");
