@@ -1,132 +1,7 @@
-//package smart.home.controller;
-//
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import smart.home.activity.PersonActivity;
-//import smart.home.event.EventGenerator;
-//import smart.home.event.EventManager;
-//import smart.home.model.*;
-//
-//import java.util.Random;
-//import java.util.logging.Level;
-//
-//public class SmartHouseAPI {
-//    private static final Logger LOGGER = LoggerFactory.getLogger(SmartHouseAPI.class);
-//    EventManager eventManager;
-//    House house = House.getHouse();
-//    public SmartHouseAPI(EventManager eventManager) {
-//        this.eventManager = eventManager;
-//    }
-//
-//    /**
-//     * Method sets simulation parameters(time, pauses).
-//     * @param eventGenerator
-//     */
-//    public void startSimulation(EventGenerator eventGenerator){
-//        final long startTime = 6;
-//        final long endTime = 18;
-//        long currentTime = startTime;
-//
-//        final long simulationSpeed = 1; // Speed factor (10x, 100x, etc.)
-//
-//        while (currentTime < endTime){
-//            if(currentTime == 6){
-//                openBlinds();
-//            }
-//            if(currentTime == 17){
-//                closeBlinds();
-//            }
-//            LOGGER.info("Simulated time: " +  currentTime + ":00");
-//            //rand event generated
-//            eventGenerator.generateEvent();
-//
-//            //update device consumption
-//            collectDeviceData();
-//            updatePerformance();
-//            currentTime += 1 * simulationSpeed;
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Method subscribes all devices as observers.
-//     */
-//public void subscribeDevices(){
-//
-//    for(Floor floor : house.getFloors()){
-//        for(Room room : floor.getRooms()){
-//            eventManager.subscribe(room.getLightDevice());
-//            eventManager.subscribe(room.getMotionSensor());
-//            eventManager.subscribe(room.getThermostatSensor());
-//
-//
-//            if(room instanceof Bathroom){
-//                eventManager.subscribe(((Bathroom) room).getFloodSensor());
-//            }
-//            if(room instanceof Kitchen){
-//                eventManager.subscribe(((Kitchen) room).getFloodSensor());
-//            }
-//            if(room.getDevices()!=null) {
-//                for (Device d : room.getDevices()) {
-//                    eventManager.subscribe(d);
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//
-//    /**
-//     * Method allows to collect device`s consumption.
-//     */
-//    public void collectDeviceData() {
-//        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
-//        for(Device d: house.getDevices()){
-//            deviceAPI.recordConsumption(d);
-//        }
-//    }
-//
-//    /**
-//     * Method randomly updates performance of a device.
-//     */
-//    public void updatePerformance(){
-//        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
-//        Random rand = new Random();
-//        int devIndex= rand.nextInt(house.getDevices().size());
-//
-//        for(Device d: house.getDevices()){
-//            if(rand.nextBoolean()){
-//                //pick random ones
-//                deviceAPI.performActionByState(d);
-//                break;
-//            }
-//
-//        }
-//    }
-//
-//    /**
-//     * Method allows to open blinds.
-//     */
-//    public void openBlinds(){
-//    LOGGER.info("Blinds are open!");
-//}
-//
-//    /**
-//     * Method allows to close blinds .
-//     */
-//    public void closeBlinds(){
-//        LOGGER.info("Blinds are closed!");
-//    }
-//}
 package smart.home.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import smart.home.activity.PersonActivity;
 import smart.home.event.EventGenerator;
 import smart.home.event.EventManager;
 import smart.home.model.*;
@@ -134,45 +9,58 @@ import smart.home.util.HouseConfig;
 import smart.home.util.Report;
 
 import java.util.Random;
-import java.util.logging.Level;
 
 public class SmartHouseAPI {
     private static final Logger LOGGER = LoggerFactory.getLogger(SmartHouseAPI.class);
-    EventManager eventManager;
-    House house ;
+    private EventManager eventManager;
+    private House house;
+    private long startTime = 0;
+    private long endTime = 0;
     public SmartHouseAPI() {
         // this.eventManager = new EventManager();
+    }
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
     /**
      * runs Simulation , subscribes devices, calls generation of events
      * at the end of simulation generates reports
      */
-    public void runSimulation(){
+    public void runSimulation() {
         HouseConfig houseConfig1 = new HouseConfig();
         houseConfig1.setFirstHouseConfig();
         EventManager eventManager = new EventManager();
-        this.eventManager=eventManager;
-        house=House.getHouse();
+        this.eventManager = eventManager;
+        house = House.getHouse();
         subscribeDevices();
-        EventGenerator eventGenerator=new EventGenerator(eventManager);
-
+        EventGenerator eventGenerator = new EventGenerator(eventManager);
         house.setEventManager(eventManager);
-
-        final long startTime = 6;
-        final long endTime = 18;
+        setStartTime(6);
+        setEndTime(17);
         long currentTime = startTime;
 
         final long simulationSpeed = 1; // Speed factor (10x, 100x, etc.)
 
-        while (currentTime < endTime){
-            if(currentTime == 6){
+        while (currentTime <= endTime) {
+            if (currentTime == getStartTime()) {
                 openBlinds();
             }
-            if(currentTime == 17){
+            if (currentTime == getEndTime()) {
                 closeBlinds();
             }
-            LOGGER.info("Simulated time: " +  currentTime + ":00");
+            LOGGER.info("Simulated time: " + currentTime + ":00");
             //rand event generated
             eventGenerator.generateEvent();
 
@@ -193,22 +81,22 @@ public class SmartHouseAPI {
     /**
      * Method subscribes all devices and sensors as observers.
      */
-    public void subscribeDevices(){
+    public void subscribeDevices() {
 
-        for(Floor floor : house.getFloors()){
-            for(Room room : floor.getRooms()){
+        for (Floor floor : house.getFloors()) {
+            for (Room room : floor.getRooms()) {
                 eventManager.subscribe(room.getLightDevice());
                 eventManager.subscribe(room.getMotionSensor());
                 eventManager.subscribe(room.getThermostatSensor());
 
 
-                if(room instanceof Bathroom){
+                if (room instanceof Bathroom) {
                     eventManager.subscribe(((Bathroom) room).getFloodSensor());
                 }
-                if(room instanceof Kitchen){
+                if (room instanceof Kitchen) {
                     eventManager.subscribe(((Kitchen) room).getFloodSensor());
                 }
-                if(room.getDevices()!=null) {
+                if (room.getDevices() != null) {
                     for (Device d : room.getDevices()) {
                         eventManager.subscribe(d);
                     }
@@ -223,7 +111,7 @@ public class SmartHouseAPI {
      */
     public void collectDeviceData() {
         DeviceAPI<Device> deviceAPI = new DeviceAPIImpl<>();
-        for(Device d: house.getDevices()){
+        for (Device d : house.getDevices()) {
             deviceAPI.recordConsumption(d);
         }
     }
@@ -231,13 +119,13 @@ public class SmartHouseAPI {
     /**
      * Method randomly updates performance of a device.
      */
-    public void updatePerformance(){
+    public void updatePerformance() {
         DeviceAPI<Device> deviceAPI = new DeviceAPIImpl<>();
         Random rand = new Random();
-        int devIndex= rand.nextInt(house.getDevices().size());
+        int devIndex = rand.nextInt(house.getDevices().size());
 
-        for(Device d: house.getDevices()){
-            if(rand.nextBoolean()){
+        for (Device d : house.getDevices()) {
+            if (rand.nextBoolean()) {
                 //pick random ones
                 deviceAPI.performActionByState(d);
                 break;
@@ -249,14 +137,14 @@ public class SmartHouseAPI {
     /**
      * Method allows to open blinds.
      */
-    public void openBlinds(){
+    public void openBlinds() {
         LOGGER.info("Blinds are open!");
     }
 
     /**
      * Method allows to close blinds .
      */
-    public void closeBlinds(){
+    public void closeBlinds() {
         LOGGER.info("Blinds are closed!");
     }
 }

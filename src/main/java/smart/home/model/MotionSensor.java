@@ -1,12 +1,9 @@
 package smart.home.model;
 
 import org.slf4j.LoggerFactory;
-import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 
-import java.util.logging.Logger;
-
-public class MotionSensor implements Sensor{
+public class MotionSensor implements Sensor {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MotionSensor.class);
 
     @Override
@@ -26,7 +23,7 @@ public class MotionSensor implements Sensor{
                     event.getRoom().getLightDevice().turnLightOff(event);
                     event.isHandled = true;
                 }
-                    break;
-                }
+                break;
         }
+    }
 }

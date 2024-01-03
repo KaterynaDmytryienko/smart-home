@@ -3,8 +3,6 @@ package smart.home.event;
 import smart.home.activity.AnimalActivity;
 import smart.home.activity.PersonActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class EventGenerator {

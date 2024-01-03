@@ -1,6 +1,8 @@
 package smart.home.model;
 
 public class Window {
+    private boolean isOpened = false;
+
     public boolean isOpened() {
         return isOpened;
     }
@@ -9,5 +11,5 @@ public class Window {
         isOpened = opened;
     }
 
-    private boolean isOpened = false;
+
 }

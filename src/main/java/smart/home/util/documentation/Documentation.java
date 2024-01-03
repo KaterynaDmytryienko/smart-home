@@ -2,8 +2,6 @@ package smart.home.util.documentation;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Documentation {
@@ -13,9 +11,10 @@ public class Documentation {
         this.documentationFilePath = documentationFilePath;
     }
 
-    String getDocumentationFilePath(){
+    String getDocumentationFilePath() {
         return documentationFilePath;
-    };
+    }
+
 
     /**
      * @return loads instructions from file using documentationFilePath
@@ -34,9 +33,11 @@ public class Documentation {
                 System.out.println("File not found: " + documentationFilePath);
                 return "";
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
-    };
+    }
+
+
 }

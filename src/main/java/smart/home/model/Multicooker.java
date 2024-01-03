@@ -6,26 +6,27 @@ import smart.home.event.Event;
 
 import java.util.Random;
 
-public class Multicooker extends Device{
+public class Multicooker extends Device {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Multicooker.class);
 
     public Multicooker() {
         super();
-        Consumption activeConsumption=new Consumption(200,0,100);
+        Consumption activeConsumption = new Consumption(200, 0, 100);
         setActiveConsumption(activeConsumption);
-        Consumption offConsumption=new Consumption(0,0,0);
+        Consumption offConsumption = new Consumption(0, 0, 0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(50,0,0);
+        Consumption idleConsumption = new Consumption(50, 0, 0);
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.IDLE);
     }
 
     /**
      * Method picks Multicooker from a random room and assigns user that has used it.
+     *
      * @param personName
      */
-    public void getRandomDevice(String personName){
+    public void getRandomDevice(String personName) {
         Random random = new Random();
         if (random.nextBoolean()) {
             for (Device d : house.getDevices()) {
@@ -35,9 +36,8 @@ public class Multicooker extends Device{
                     break;
                 }
             }
-        }
-        else {
-            for(int i = house.getDevices().size()-1; i >=0 ; i--){
+        } else {
+            for (int i = house.getDevices().size() - 1; i >= 0; i--) {
                 if (house.getDevices().get(i) instanceof Multicooker) {
                     house.getDevices().get(i).setCurrentState(DeviceState.ACTIVE);
                     house.getDevices().get(i).addUser(personName);
@@ -53,10 +53,10 @@ public class Multicooker extends Device{
             LOGGER.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
         }
 
-         if( event.getType()== EventTypes.COOK_IN_MULTICOOKER) {
-                    LOGGER.info(event.getSource().getName()+ " is using the multi-cooker.");
-                    getRandomDevice(event.getSource().getName());
-                    event.isHandled=true;
-         }
+        if (event.getType() == EventTypes.COOK_IN_MULTICOOKER) {
+            LOGGER.info(event.getSource().getName() + " is using the multi-cooker.");
+            getRandomDevice(event.getSource().getName());
+            event.isHandled = true;
+        }
     }
 }

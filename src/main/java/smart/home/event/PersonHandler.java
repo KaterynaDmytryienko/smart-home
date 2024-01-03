@@ -4,7 +4,6 @@ import smart.home.activity.PersonActivity;
 import smart.home.model.Person;
 
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 
 public class PersonHandler implements EventHandler {
@@ -13,7 +12,7 @@ public class PersonHandler implements EventHandler {
 
     private PersonActivity personActivity = new PersonActivity();
 
-    public PersonHandler(EventManager eventManager){
+    public PersonHandler(EventManager eventManager) {
         this.eventManager = eventManager;
     }
 
@@ -24,6 +23,7 @@ public class PersonHandler implements EventHandler {
 
     /**
      * Method sets the way how person would react to the event based on age, ect.
+     *
      * @param event Event to be handled.
      */
     @Override
@@ -32,7 +32,7 @@ public class PersonHandler implements EventHandler {
         Event eventToArchive = null;
         Event eventToArchive2 = null;
         Person selectedToWait = null;
-        if(event.getSource()==null||event.getSource() instanceof Person) {
+        if (event.getSource() == null || event.getSource() instanceof Person) {
             List<Person> people = personActivity.getPeople();
             Random rand = new Random();
             selectedPerson = people.get(rand.nextInt(people.size()));
@@ -54,81 +54,80 @@ public class PersonHandler implements EventHandler {
                 }
             }
             if (selectedToWait == selectedPerson) selectedToWait = null;
-              eventToArchive = event;
+            eventToArchive = event;
             eventToArchive.setSource(selectedPerson);
 
             eventToArchive2 = new Event(event.getType(), selectedToWait, event.getRoom());
 
             switch (event.getType()) {
                 case DEVICE_BREAKAGE:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.fixDevice(selectedPerson, event.getDevice());
-                    if (event.getDevice() != null){
+                    if (event.getDevice() != null) {
                         eventToArchive.setDevice(event.getDevice());
-                        event.isHandled=true;
+                        event.isHandled = true;
                     }
                     break;
                 case BABY_SCREAM:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.helpTheChild(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case PERSON_HUNGRY:
                     personActivity.eat(selectedPerson, selectedToWait);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case PERSON_THIRSTY:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.openFridge(selectedPerson);
                     personActivity.drink(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case PLAY:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.play(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case USE_TREADMILL:
                     personActivity.useTreadmill(selectedPerson, selectedToWait);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case LISTEN_TO_MUSIC:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.listenToMusic(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case SKI:
                     personActivity.ski(selectedPerson, selectedToWait);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case WORKOUT:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.workout(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case DRIVE:
-                    selectedToWait=null;
+                    selectedToWait = null;
                     personActivity.drive(selectedPerson);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
                 case CYCLE:
                     personActivity.cycle(selectedPerson, selectedToWait);
-                    event.isHandled=true;
+                    event.isHandled = true;
                     break;
             }
 
         }
 
-        if (!event.isHandled){
+        if (!event.isHandled) {
             eventHandler.handleEvent(event);
-        }else{
+        } else {
             eventManager.addToEvents(eventToArchive);
-            if(selectedToWait!=null&&eventToArchive2.getSource()!=null)
+            if (selectedToWait != null && eventToArchive2.getSource() != null)
                 eventManager.addToEvents(eventToArchive2);
         }
 
     }
-
 
 
 }

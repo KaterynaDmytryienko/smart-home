@@ -2,18 +2,18 @@ package smart.home.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import smart.home.activity.PersonActivity;
 import smart.home.event.Event;
 
 public class Skis extends Device {
     private static final Logger LOGGER = LoggerFactory.getLogger(Skis.class);
+
     public Skis() {
         super();
-        Consumption activeConsumption=new Consumption(0,0,0);
+        Consumption activeConsumption = new Consumption(0, 0, 0);
         setActiveConsumption(activeConsumption);
-        Consumption offConsumption=new Consumption(0,0,0);
+        Consumption offConsumption = new Consumption(0, 0, 0);
         setOffConsumption(offConsumption);
-        Consumption idleConsumption=new Consumption(0,0,0);
+        Consumption idleConsumption = new Consumption(0, 0, 0);
         setIdleConsumption(idleConsumption);
         this.setCurrentState(DeviceState.OFF);
     }

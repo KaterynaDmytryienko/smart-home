@@ -1,7 +1,6 @@
 package smart.home.event;
 
 import smart.home.activity.AnimalActivity;
-import smart.home.activity.PersonActivity;
 import smart.home.model.Animal;
 
 public class AnimalHandler implements EventHandler  {

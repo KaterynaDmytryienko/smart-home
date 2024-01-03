@@ -1,12 +1,13 @@
 package smart.home.event;
 
-public class DeviceHandler implements EventHandler{
+public class DeviceHandler implements EventHandler {
     private EventHandler eventHandler;
     private EventManager eventManager;
 
-    public DeviceHandler(EventManager eventManager){
+    public DeviceHandler(EventManager eventManager) {
         this.eventManager = eventManager;
     }
+
     @Override
     public void assignToNext(EventHandler eventHandler) {
         this.eventHandler = eventHandler;
@@ -14,6 +15,7 @@ public class DeviceHandler implements EventHandler{
 
     /**
      * Method allows to handle an event.
+     *
      * @param event The event to handle.
      */
 
@@ -26,7 +28,7 @@ public class DeviceHandler implements EventHandler{
             } else {
                 eventManager.addToEvents(event);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

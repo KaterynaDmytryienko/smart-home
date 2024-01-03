@@ -3,10 +3,11 @@ package smart.home.util;
 import smart.home.model.*;
 
 
-public class HouseConfigurationReport extends Report{
+public class HouseConfigurationReport extends Report {
 
     /**
      * Method sets the format of report based on house configuration.
+     *
      * @return Formatted string representing the house configuration report for the household.
      */
     @Override
@@ -52,4 +53,4 @@ public class HouseConfigurationReport extends Report{
 
         return reportBuilder.toString();
     }
-    }
+}

@@ -8,6 +8,7 @@ public class Item {
     }
 
     private String type;
+
     public Item(int amount, String type) {
         this.amount = amount;
         this.type = type;

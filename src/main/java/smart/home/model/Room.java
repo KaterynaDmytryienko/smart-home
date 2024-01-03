@@ -4,6 +4,21 @@ import java.util.List;
 
 public abstract class Room {
     private String name;
+    private boolean isEmpty = false;
+    private Window window;
+
+    public Room(List<Device> devices) {
+        setLightDevice(new LightDevice());
+        setMotionSensor(new MotionSensor());
+        setThermostatSensor(new ThermostatSensor());
+        setWindow(new Window());
+
+        this.devices = devices;
+    }
+
+    public Room() {
+
+    }
 
     public String getName() {
         return name;
@@ -13,24 +28,11 @@ public abstract class Room {
         this.name = name;
     }
 
-    public Room(List<Device>devices){
-        setLightDevice(new LightDevice());
-        setMotionSensor(new MotionSensor());
-        setThermostatSensor(new ThermostatSensor());
-        setWindow(new Window());
-
-        this.devices = devices;
-    }
-    public Room(){
-
-    }
-    private boolean isEmpty = false;
-
     public List<Device> getDevices() {
         return devices;
     }
 
-    private List<Device>devices;
+    private List<Device> devices;
     private MotionSensor motionSensor;
     private LightDevice lightDevice;
     private ThermostatSensor thermostatSensor;
@@ -42,9 +44,6 @@ public abstract class Room {
     public void setWindow(Window window) {
         this.window = window;
     }
-
-    private Window window;
-
 
     public boolean isEmpty() {
         return isEmpty;

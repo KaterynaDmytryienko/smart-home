@@ -4,25 +4,27 @@ import smart.home.event.EventManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class House {
     private EventManager eventManager;
-    private List<Animal>animals;
-    private  List<Person>people;
-    private  List<Device>devices;
-    private List<Sensor>sensors;
-    private List<Item>items;
-    private  List<Floor>floors;
+    private List<Animal> animals;
+    private List<Person> people;
+    private List<Device> devices;
+    private List<Sensor> sensors;
+    private List<Item> items;
+    private List<Floor> floors;
     private static House house;
 
-    private House(){}
-    public static House getHouse(){
-        if(house==null){
-            house=new House();
+    private House() {
+    }
+
+    public static House getHouse() {
+        if (house == null) {
+            house = new House();
         }
         return house;
     }
+
     public EventManager getEventManager() {
         return eventManager;
     }
@@ -30,6 +32,7 @@ public class House {
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
     }
+
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -47,11 +50,11 @@ public class House {
     }
 
     public List<Device> getDevices() {
-        List<Device>devices1=new ArrayList<>();
-        for(Floor floor : house.getFloors()){
-            for(Room room : floor.getRooms()) {
-                if(room.getDevices()!=null){
-                    for (Device d: room.getDevices()) devices1.add(d);
+        List<Device> devices1 = new ArrayList<>();
+        for (Floor floor : house.getFloors()) {
+            for (Room room : floor.getRooms()) {
+                if (room.getDevices() != null) {
+                    for (Device d : room.getDevices()) devices1.add(d);
                 }
             }
 
@@ -83,6 +86,7 @@ public class House {
     public List<Room> getRooms(int floorIndex) {
         return floors.get(floorIndex).getRooms();
     }
+
     public List<Floor> getFloors() {
         return floors;
     }
