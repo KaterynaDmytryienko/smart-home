@@ -13,7 +13,7 @@ public class AnimalActivityTest {
     @Test
     public void animalPlayTest(){
         House house = House.getHouse();
-        Animal animal=new Animal("Bird","Mandarinka");
+        Animal animal=new Animal("Mandarinka");
         Floor floor = new Floor(1);
         Room room = new LivingRoom();
         Item item = new Item(1, "feather");
@@ -39,7 +39,7 @@ public class AnimalActivityTest {
     @Test
     public void animalThirstyTest(){
         House house = House.getHouse();
-        Animal animal=new Animal("Bird","Mandarinka");
+        Animal animal=new Animal("Mandarinka");
         Floor floor = new Floor(1);
         Room room = new LivingRoom();
         List<Animal> animals = new ArrayList<>();
@@ -60,7 +60,7 @@ public class AnimalActivityTest {
     @Test
     public void animalHungryTest(){
         House house = House.getHouse();
-        Animal animal=new Animal("Bird","Mandarinka");
+        Animal animal=new Animal("Mandarinka");
         Floor floor = new Floor(1);
         Room room = new LivingRoom();
         List<Animal> animals = new ArrayList<>();

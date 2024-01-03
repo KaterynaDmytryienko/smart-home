@@ -14,9 +14,9 @@ public class HouseConfig {
         House house = House.getHouse();
         // Set up the first configuration
         List<Animal> animalsConfig1 = new ArrayList<Animal>() {{
-            add(new Animal("cat", "Laska"));
-            add(new Animal("dog", "Sharik"));
-            add(new Animal("parrot", "Mandarinka"));
+            add(new Animal("Laska"));
+            add(new Animal("Sharik"));
+            add(new Animal("Mandarinka"));
         }};
         List<Person> peopleConfig1 = new ArrayList<Person>() {{
             add(new Person("Rachel", "female", 30, true));
@@ -121,10 +121,10 @@ public class HouseConfig {
     public static void setSecondHouseConfig() {
         House house = House.getHouse();
         List<Animal> animalsConfig2 = new ArrayList<Animal>() {{
-            add(new Animal("cat", "Murzik"));
-            add(new Animal("dog", "Archi"));
-            add(new Animal("parrot", "Mango"));
-            add(new Animal("parrot", "Kesha"));
+            add(new Animal("Murzik"));
+            add(new Animal("Archi"));
+            add(new Animal("Mango"));
+            add(new Animal("Kesha"));
         }};
         List<Person> peopleConfig2 = new ArrayList<Person>() {{
             add(new Person("Gabriel", "male", 25, true));

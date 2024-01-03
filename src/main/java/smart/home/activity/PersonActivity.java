@@ -2,6 +2,7 @@ package smart.home.activity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import smart.home.event.EventManager;
 import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.model.*;
@@ -17,7 +18,6 @@ public class PersonActivity implements Activity {
     public List<Person> getPeople() {
         return people;
     }
-
     /**
      * Method generates random events on a random floor in a random room
      * considering 50/50 ratio of sport and other events.
@@ -27,16 +27,17 @@ public class PersonActivity implements Activity {
      */
     @Override
     public Event doSomething(boolean sportEvent) {
+        EventManager eventManager=house.getEventManager();
         Random rand = new Random();
         Person selectedPerson = people.get(rand.nextInt(people.size()));
 
         EventTypes[] events = EventTypes.values();
 
-        int min = 2;
-        int max = 14;
+        int min = eventManager.getFIRST_PERSON_EVENT_INDEX();
+        int max = eventManager.getLAST_PERSON_EVENT_INDEX();
         if (sportEvent) {
-            min = 0;
-            max = 3;
+            min = eventManager.getFIRST_SPORT_EVENT_INDEX();
+            max = eventManager.getLAST_SPORT_EVENT_INDEX();
         }
         int range = max - min + 1;
         int eventIndex = rand.nextInt(range) + min;
@@ -48,7 +49,6 @@ public class PersonActivity implements Activity {
         int roomIndex = rand.nextInt(rooms.size());
 
         return new Event(events[eventIndex], selectedPerson, rooms.get(roomIndex));
-
     }
 
     /**

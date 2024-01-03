@@ -48,7 +48,7 @@ public class HouseConfigurationReport extends Report {
         // Items
         reportBuilder.append("\n\nItems:\n\t");
         for (Item item : house.getItems()) {
-            reportBuilder.append(item.getType()).append("\n");
+            reportBuilder.append(item.getName()).append("\n");
         }
 
         return reportBuilder.toString();

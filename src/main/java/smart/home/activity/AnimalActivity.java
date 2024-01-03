@@ -1,5 +1,6 @@
 package smart.home.activity;
 
+import smart.home.event.EventManager;
 import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.model.*;
@@ -10,7 +11,6 @@ import java.util.Random;
 public class AnimalActivity implements Activity {
     private List<Animal> animals = House.getHouse().getAnimals();
     House house = House.getHouse();
-
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -23,19 +23,18 @@ public class AnimalActivity implements Activity {
      */
     @Override
     public Event doSomething(boolean sportEvent) {
+        EventManager eventManager=house.getEventManager();
         Random rand = new Random();
         Animal selectedAnimal = animals.get(rand.nextInt(animals.size()));
 
-
         EventTypes[] events = EventTypes.values();
-        int min = 14;  // Index of ENTER_ROOM
-        int max = 18;
+        int min = eventManager.getFIRST_ANIMAL_EVENT_INDEX();
+        int max = eventManager.getLAST_ANIMAL_EVENT_INDEX();
 
         int range = max - min + 1;
         int eventIndex = rand.nextInt(range) + min;
         List<Floor> floors = house.getFloors();
         int floorIndex = rand.nextInt(floors.size());
-
         List<Room> rooms = house.getRooms(floorIndex);
         int roomIndex = rand.nextInt(rooms.size());
 
@@ -59,6 +58,6 @@ public class AnimalActivity implements Activity {
      * @param animal The animal to play with the chosen item.
      */
     public void play(Inhabitant animal) {
-        System.out.println(animal.getName() + " is playing with " + getRandomItem().getType());
+        System.out.println(animal.getName() + " is playing with " + getRandomItem().getName());
     }
 }

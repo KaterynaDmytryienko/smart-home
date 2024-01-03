@@ -2,16 +2,14 @@ package smart.home.model;
 
 public class Item {
     private int amount;
+    private String name;
 
-    public String getType() {
-        return type;
-    }
-
-    private String type;
-
-    public Item(int amount, String type) {
+    public Item(int amount, String name) {
         this.amount = amount;
-        this.type = type;
+        this.name = name;
+    }
+    public String getName() {
+        return name;
     }
 
     public int getAmount() {
