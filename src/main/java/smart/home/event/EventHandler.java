@@ -5,7 +5,7 @@ public interface EventHandler {
      * Assigns the next handler in the chain to be invoked if the current handler
      * cannot handle the event.
      *
-     * @param eventHandler the next handler in the chain.
+     * @param eventHandler the next handler in the chain
      */
     void assignToNext(EventHandler eventHandler);
 
