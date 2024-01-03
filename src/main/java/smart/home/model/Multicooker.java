@@ -1,12 +1,10 @@
 package smart.home.model;
 
 import org.slf4j.LoggerFactory;
-import smart.home.activity.PersonActivity;
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class Multicooker extends Device{
 
@@ -55,7 +53,7 @@ public class Multicooker extends Device{
             LOGGER.info(this.getName(this) + " is broken in the " + event.getRoom().getName() + "!!!");
         }
 
-         if( event.getType()== Even_Types.COOK_IN_MULTICOOKER) {
+         if( event.getType()== EventTypes.COOK_IN_MULTICOOKER) {
                     LOGGER.info(event.getSource().getName()+ " is using the multi-cooker.");
                     getRandomDevice(event.getSource().getName());
                     event.isHandled=true;

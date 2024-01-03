@@ -1,12 +1,12 @@
 package smart.home.model;
 
 import smart.home.controller.DeviceAPI;
-import smart.home.controller.DeviceAPII;
+import smart.home.controller.DeviceAPIImpl;
 import smart.home.event.Event;
 
 public class LightDevice extends Device{
     private boolean isTurnedOn = false;
-    private DeviceAPI deviceAPI = new DeviceAPII();
+    private DeviceAPI deviceAPI = new DeviceAPIImpl();
 
     public LightDevice() {
         super();

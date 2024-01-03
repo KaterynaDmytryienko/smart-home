@@ -7,14 +7,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class House {
-    public EventManager getEventManager() {
-        return eventManager;
-    }
-
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
-
     private EventManager eventManager;
     private List<Animal>animals;
     private  List<Person>people;
@@ -22,8 +14,6 @@ public class House {
     private List<Sensor>sensors;
     private List<Item>items;
     private  List<Floor>floors;
-
-
     private static House house;
 
     private House(){}
@@ -33,7 +23,13 @@ public class House {
         }
         return house;
     }
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+    }
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -87,11 +83,6 @@ public class House {
     public List<Room> getRooms(int floorIndex) {
         return floors.get(floorIndex).getRooms();
     }
-//
-//    public void setRooms(List<Room> rooms) {
-//        this.rooms = rooms;
-//    }
-
     public List<Floor> getFloors() {
         return floors;
     }

@@ -1,7 +1,6 @@
 package smart.home.util;
 
-import smart.home.activity.PersonActivity;
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.event.EventGenerator;
 import smart.home.event.EventManager;
@@ -20,7 +19,7 @@ public class EventReport extends Report{
 
     /**
      * Method sets the format of report based on the events.
-     * @return String
+     * @return Formatted string representing the event report for the household.
      */
     @Override
     protected String prepareReportContent() {
@@ -31,7 +30,7 @@ public class EventReport extends Report{
 
         for (Event e : events) {
             if(e.getSource()!=null) {
-                if(e.getType()== Even_Types.BABY_SCREAM||e.getType()==Even_Types.DEVICE_BREAKAGE||e.getType()==Even_Types.FLOOD)
+                if(e.getType()== EventTypes.BABY_SCREAM||e.getType()== EventTypes.DEVICE_BREAKAGE||e.getType()== EventTypes.FLOOD)
                     reportBuilder.append(e.getSource().getName() +" handled " + e.getType() +" in "+ e.getRoom().getName() + "\n");
                 else
                 {

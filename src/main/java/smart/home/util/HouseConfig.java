@@ -7,7 +7,6 @@ import java.util.List;
 
 public class HouseConfig {
 
-
     /**
      * Method defines first house configuration.
      */

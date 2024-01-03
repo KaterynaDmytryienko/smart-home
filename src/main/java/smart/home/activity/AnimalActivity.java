@@ -1,6 +1,6 @@
 package smart.home.activity;
 
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.model.*;
 
@@ -17,8 +17,8 @@ public class AnimalActivity implements Activity{
 
     /**
      * Method generates random animal events on a random floor in a random room.
-     * @param sportEvent
-     * @return
+     * @param sportEvent A boolean flag indicating whether the generated event is sport-related.
+     * @return An instance of the Event representing the randomly generated event.
      */
 @Override
     public Event doSomething(boolean sportEvent){
@@ -26,7 +26,7 @@ public class AnimalActivity implements Activity{
         Animal selectedAnimal = animals.get(rand.nextInt(animals.size()));
 
 
-    Even_Types[] events = Even_Types.values();
+    EventTypes[] events = EventTypes.values();
     int min = 14;  // Index of ENTER_ROOM
     int max = 18;
 
@@ -44,7 +44,7 @@ public class AnimalActivity implements Activity{
 
     /**
      * Method returns randomly chosen item.
-     * @return Item
+     * @return  A randomly chosen Item from the house's items list.
      */
     public Item getRandomItem(){
         Random rand = new Random();
@@ -54,9 +54,9 @@ public class AnimalActivity implements Activity{
 
     /**
      * Method allows an animal to play with chosen item.
-     * @param animal
+     * @param animal The animal to play with the chosen item.
      */
-    public void play(Entity animal){
+    public void play(Inhabitant animal){
         System.out.println(animal.getName()+" is playing with "+getRandomItem().getType());
 
     }

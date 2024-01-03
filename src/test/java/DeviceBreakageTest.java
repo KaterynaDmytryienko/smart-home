@@ -1,5 +1,5 @@
 import org.junit.Test;
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.event.EventManager;
 import smart.home.model.*;
@@ -31,7 +31,7 @@ public class DeviceBreakageTest {
         house.setFloors(floors);
         house.setDevices(devices);
         floor.setRooms(rooms);
-        Event event=new Event(Even_Types.DEVICE_BREAKAGE,device,room);
+        Event event=new Event(EventTypes.DEVICE_BREAKAGE,device,room);
         EventManager eventManager=new EventManager();
         eventManager.handleEvent(event);
 

@@ -12,7 +12,10 @@ public class AnimalHandler implements EventHandler  {
     public AnimalHandler(EventManager eventManager){
         this.eventManager = eventManager;
     }
-
+    /**
+     * Assigns the next event handler in the chain.AnimalHandler is the last handler in order.
+     * @param eventHandler The next event handler in the chain.
+     */
     @Override
     public void assignToNext(EventHandler eventHandler) {
 
@@ -20,7 +23,7 @@ public class AnimalHandler implements EventHandler  {
 
     /**
      * Method allows to handle an event.
-     * @param event
+     * @param event The event to handle.
      */
     @Override
     public void handleEvent(Event event) {

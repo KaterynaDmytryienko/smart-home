@@ -24,7 +24,7 @@ public class PersonHandler implements EventHandler {
 
     /**
      * Method sets the way how person would react to the event based on age, ect.
-     * @param event
+     * @param event Event to be handled.
      */
     @Override
     public void handleEvent(Event event) {
@@ -69,6 +69,7 @@ public class PersonHandler implements EventHandler {
                     }
                     break;
                 case BABY_SCREAM:
+                    selectedToWait=null;
                     personActivity.helpTheChild(selectedPerson);
                     event.isHandled=true;
                     break;
@@ -77,11 +78,13 @@ public class PersonHandler implements EventHandler {
                     event.isHandled=true;
                     break;
                 case PERSON_THIRSTY:
+                    selectedToWait=null;
                     personActivity.openFridge(selectedPerson);
                     personActivity.drink(selectedPerson);
                     event.isHandled=true;
                     break;
                 case PLAY:
+                    selectedToWait=null;
                     personActivity.play(selectedPerson);
                     event.isHandled=true;
                     break;
@@ -90,6 +93,7 @@ public class PersonHandler implements EventHandler {
                     event.isHandled=true;
                     break;
                 case LISTEN_TO_MUSIC:
+                    selectedToWait=null;
                     personActivity.listenToMusic(selectedPerson);
                     event.isHandled=true;
                     break;
@@ -98,10 +102,12 @@ public class PersonHandler implements EventHandler {
                     event.isHandled=true;
                     break;
                 case WORKOUT:
+                    selectedToWait=null;
                     personActivity.workout(selectedPerson);
                     event.isHandled=true;
                     break;
                 case DRIVE:
+                    selectedToWait=null;
                     personActivity.drive(selectedPerson);
                     event.isHandled=true;
                     break;

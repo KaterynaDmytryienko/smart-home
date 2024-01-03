@@ -20,7 +20,7 @@ public class ActivityAndUsageReport extends Report{
 
     /**
      * Method sets the format of report based on the activity and usage.
-     * @return String
+     * @return Formatted string representing the activity and usage report for the household.
      */
     @Override
     protected String prepareReportContent() {

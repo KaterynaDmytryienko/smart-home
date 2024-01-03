@@ -1,6 +1,6 @@
 package smart.home.model;
 
-public abstract class Entity {
+public abstract class Inhabitant {
     protected String name;
 
     public String getName() {

@@ -1,7 +1,7 @@
 package smart.home.util;
 
 import smart.home.controller.DeviceAPI;
-import smart.home.controller.DeviceAPII;
+import smart.home.controller.DeviceAPIImpl;
 import smart.home.model.Device;
 import smart.home.model.House;
 
@@ -11,7 +11,7 @@ public class ConsumptionReport extends Report{
 
     /**
      * Method sets the format of report based on the consumption.
-     * @return String
+     * @return Formatted string representing the consumption report for the household.
      */
     @Override
     protected String prepareReportContent() {
@@ -19,7 +19,7 @@ public class ConsumptionReport extends Report{
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append("Device consumption report\n");
         House house=House.getHouse();
-        DeviceAPI<Device> deviceAPI = new DeviceAPII<>();
+        DeviceAPI<Device> deviceAPI = new DeviceAPIImpl<>();
         double totalElectricity=0.0;
         double totalGas=0.0;
         double totalWater=0.0;

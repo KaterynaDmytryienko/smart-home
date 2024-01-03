@@ -1,8 +1,6 @@
 package smart.home.model;
 
-import smart.home.util.documentation.Documentation;
-
-public class Person extends Entity{
+public class Person extends Inhabitant {
     private String gender;
     private int age;
     private boolean hasDriveLicense;

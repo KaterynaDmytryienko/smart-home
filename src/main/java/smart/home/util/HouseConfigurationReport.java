@@ -7,7 +7,7 @@ public class HouseConfigurationReport extends Report{
 
     /**
      * Method sets the format of report based on house configuration.
-     * @return String
+     * @return Formatted string representing the house configuration report for the household.
      */
     @Override
     protected String prepareReportContent() {

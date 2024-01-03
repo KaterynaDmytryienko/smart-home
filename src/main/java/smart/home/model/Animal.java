@@ -1,6 +1,6 @@
 package smart.home.model;
 
-public class Animal extends Entity {
+public class Animal extends Inhabitant {
     private String type;
 
     public Animal(String type, String name) {

@@ -1,6 +1,6 @@
 package smart.home.model;
 
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.event.Observer;
 import smart.home.util.documentation.Documentation;
@@ -44,6 +44,14 @@ public abstract class Device implements Observer {
             this.waterConsumption = waterConsumption;
         }
     }
+    Consumption activeConsumption;
+    Consumption offConsumption;
+    Consumption idleConsumption;
+    House house = House.getHouse();
+    private int functionality = 100;
+    Map<String, Integer> users = new HashMap<>();
+    public enum DeviceState {ACTIVE, IDLE, OFF}
+    private DeviceState currentState = DeviceState.IDLE;
 
     public void setActiveConsumption(Consumption activeConsumption) {
         this.activeConsumption = activeConsumption;
@@ -57,17 +65,27 @@ public abstract class Device implements Observer {
         this.idleConsumption = idleConsumption;
     }
 
-    Consumption activeConsumption;
-    Consumption offConsumption;
-    Consumption idleConsumption;
-    House house = House.getHouse();
-
     public Map<String, Integer> getUsers() {
         return users;
+    }
+
+    public void setCurrentState(DeviceState currentState) {
+        this.currentState = currentState;
+    }
+    public int getFunctionality() {
+        return functionality;
+    }
+    public DeviceState getCurrentState() {
+        return currentState;
+    }
+
+    public void setFunctionality(int functionality) {
+        this.functionality = functionality;
     }
     public int getUserCount(String name) {
         return users.getOrDefault(name, 0);
     }
+
     public void addUser(String name) {
         if (users.containsKey(name)) {
             int currentCount = users.get(name);
@@ -77,32 +95,19 @@ public abstract class Device implements Observer {
         }
     }
 
-    Map<String, Integer> users = new HashMap<>();
-
-    public enum DeviceState {ACTIVE, IDLE, OFF}
-
-    public DeviceState getCurrentState() {
-        return currentState;
-    }
-
-    public void setCurrentState(DeviceState currentState) {
-        this.currentState = currentState;
-    }
-
-    private DeviceState currentState = DeviceState.IDLE;
-
-    public int getFunctionality() {
-        return functionality;
-    }
-
-
-    public void setFunctionality(int functionality) {
-        this.functionality = functionality;
-    }
-
-    private int functionality = 100;
-
     public static class ConsumptionRecord {
+        int electricityConsumption;
+        int gasConsumption;
+        int waterConsumption;
+        int functionality;
+        long timestamp;
+        ConsumptionRecord(int electricity, int gas, int water, int functionality, long timestamp) {
+            this.electricityConsumption = electricity;
+            this.gasConsumption = gas;
+            this.waterConsumption = water;
+            this.functionality = functionality;
+            this.timestamp = timestamp;
+        }
         public int getElectricityConsumption() {
             return electricityConsumption;
         }
@@ -115,10 +120,6 @@ public abstract class Device implements Observer {
             return waterConsumption;
         }
 
-        int electricityConsumption;
-        int gasConsumption;
-        int waterConsumption;
-
         public int getFunctionality() {
             return functionality;
         }
@@ -126,20 +127,10 @@ public abstract class Device implements Observer {
         public void setFunctionality(int functionality) {
             this.functionality = functionality;
         }
-
-        int functionality;
-        long timestamp;
-
-        ConsumptionRecord(int electricity, int gas, int water, int functionality, long timestamp) {
-            this.electricityConsumption = electricity;
-            this.gasConsumption = gas;
-            this.waterConsumption = water;
-            this.functionality = functionality;
-            this.timestamp = timestamp;
-        }
     }
 
     private List<ConsumptionRecord> consumptionHistory = new ArrayList<>();
+    private Documentation documentation;
     public List<ConsumptionRecord> getConsumptionHistory() {
         return consumptionHistory;
     }
@@ -192,8 +183,6 @@ public abstract class Device implements Observer {
         functionality--;
     }
 
-    private Documentation documentation;
-
     public Device() {
         this.documentation = null;
     }
@@ -204,29 +193,29 @@ public abstract class Device implements Observer {
      * @return String deviceName
      */
     public String getName(Device device) {
-        if(device instanceof LightDevice){
+        if (device instanceof LightDevice) {
             return "LightDevice";
-        }else if(device instanceof Fridge){
+        } else if (device instanceof Fridge) {
             return "Fridge";
-        }else if(device instanceof Bicycle){
+        } else if (device instanceof Bicycle) {
             return "Bicycle";
-        }else if(device instanceof Car){
+        } else if (device instanceof Car) {
             return "Car";
         } else if (device instanceof PetFeeder) {
             return "Pet Feeder";
         } else if (device instanceof Treadmill) {
             return "Treadmill";
-        }
-        else if(device instanceof Multicooker){
+        } else if (device instanceof Multicooker) {
             return "Multicooker";
-        }
-        else if(device instanceof Speakers){
+        } else if (device instanceof Speakers) {
             return "Speakers";
-        }
-        else if(device instanceof VacuumCleaner){
+        } else if (device instanceof VacuumCleaner) {
             return "Vacuum cleaner";
+        } else if (device instanceof Skis) {
+            return "Skis";
+        } else {
+            throw new IllegalArgumentException("Unknown device type");
         }
-        return null;
     }
 
     /**
@@ -248,11 +237,9 @@ public abstract class Device implements Observer {
         int eventIndex = rand.nextInt(6)+3;
         functionality-=eventIndex*5;
         if(functionality<=0){
-            Event event=new Event(Even_Types.DEVICE_BREAKAGE,this,getCurrentRoom());
+            Event event=new Event(EventTypes.DEVICE_BREAKAGE,this,getCurrentRoom());
             house.getEventManager().handleEvent(event);
             this.setCurrentState(DeviceState.OFF);
         }
     }
-
-
 }

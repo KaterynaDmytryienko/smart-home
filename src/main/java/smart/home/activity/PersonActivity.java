@@ -1,6 +1,6 @@
 package smart.home.activity;import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.model.*;
 
@@ -20,15 +20,15 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
     /**
      * Method generates random events on a random floor in a random room
      * considering 50/50 ratio of sport and other events.
-     * @param sportEvent
-     * @return
+     * @param sportEvent A boolean flag indicating whether the generated event is sport-related.
+     * @return An instance of the Event representing the randomly generated event.
      */
 @Override
     public Event doSomething(boolean sportEvent){
          Random rand = new Random();
          Person selectedPerson = people.get(rand.nextInt(people.size()));
 
-    Even_Types[] events = Even_Types.values();
+    EventTypes[] events = EventTypes.values();
 
     int min = 2;  // Index of ENTER_ROOM
     int max = 14;
@@ -50,8 +50,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to fix a device, with the help of a manual.
-     * @param person
-     * @param device
+     * @param person person The person attempting to fix the device.
+     * @param device The device to be fixed.
      */
     public void fixDevice(Person person,Device device) {
         if (device != null ) {
@@ -66,10 +66,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to help a child, if it is crying.
-     * @param person
+     * @param person The person helping the crying child.
      */
     public void helpTheChild(Person person){
-
         LOGGER.info(person.getName()+" is helping the child..." );
     }
 
@@ -77,8 +76,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
      * Method allows a person to eat and makes another person wait until the first person finishes eating.
      * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
      * to eat once the first person has finished.
-     * @param person
-     * @param selectedToWait
+     * @param person The person who is currently eating.
+     * @param selectedToWait The person selected to wait until the first person finishes eating.
      */
     public void eat(Person person,Person selectedToWait){
 
@@ -102,7 +101,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to drink.
-     * @param person
+     * @param person The person who is currently drinking.
      */
     public void drink(Person person){
         LOGGER.info(person.getName()+" is drinking.");
@@ -117,7 +116,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to play.
-     * @param person
+     * @param person The person who is currently playing.
      */
     public void play(Person person){
         LOGGER.info(person.getName()+" is playing...");
@@ -125,7 +124,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to open a fridge.
-     * @param person
+     * @param person The person who is currently opening a fridge.
      */
     public void openFridge(Person person){
         LOGGER.info("Opening fridge..." + person.getName());
@@ -135,8 +134,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
      * Method allows a person to use a treadmill.
      * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
      * to use a treadmill once the first person has finished.
-     * @param person
-     * @param selectedToWait
+     * @param person The person who is currently using a treadmill.
+     * @param selectedToWait The person selected to wait until the first person finishes using a treadmill.
      */
     public void useTreadmill(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is using a treadmill.");
@@ -159,7 +158,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to listen to music.
-     * @param person
+     * @param person The person who is currently using a listening to music.
      */
     public void listenToMusic(Person person){
         LOGGER.info(person.getName()+" is listening to the music via speakers.");
@@ -177,8 +176,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
      * Method allows a person to ski.
      * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
      * to ski once the first person has finished.
-     * @param person
-     * @param selectedToWait
+     * @param person The person who is currently skiing.
+     * @param selectedToWait The person selected to wait until the first person finishes skiing.
      */
     public void ski(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is skiing.");
@@ -202,7 +201,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
     /**
      * Method allows a person who has driving license to drive.
      * If the person does not have a driving license, warning will be shown.
-     * @param person
+     * @param person The person who is currently driving.
      */
     public void drive(Person person){
         if(person.isHasDriveLicense()){
@@ -221,7 +220,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
 
     /**
      * Method allows a person to workout.
-     * @param person
+     * @param person The person who is currently working out.
      */
     public void workout(Person person){
         LOGGER.info(person.getName()+" is working out.");
@@ -232,8 +231,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PersonActivity.clas
      * Method allows a person to cycle.
      * If there is a person selected to wait, this method will recursively call itself to allow the waiting person
      * to cycle once the first person has finished.
-     * @param person
-     * @param selectedToWait
+     * @param person The person who is currently cycling.
+     * @param selectedToWait The person selected to wait until the first person finishes cycling.
      */
     public void cycle(Person person, Person selectedToWait){
         LOGGER.info(person.getName()+" is cycling.");

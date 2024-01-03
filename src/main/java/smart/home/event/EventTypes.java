@@ -1,6 +1,9 @@
 package smart.home.event;
 
-public enum Even_Types {
+/**
+ * Enumeration of event types.
+ */
+public enum EventTypes {
 
     SKI, WORKOUT,  CYCLE,  USE_TREADMILL,CLEAN,
 

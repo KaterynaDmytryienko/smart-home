@@ -1,5 +1,5 @@
 import org.junit.Test;
-import smart.home.event.Even_Types;
+import smart.home.event.EventTypes;
 import smart.home.event.Event;
 import smart.home.event.EventManager;
 import smart.home.model.*;
@@ -28,7 +28,7 @@ public class AnimalActivityTest {
         house.setItems(items);
         floor.setRooms(rooms);
         house.setAnimals(animals);
-        Event event=new Event(Even_Types.PLAY,animal,room);
+        Event event=new Event(EventTypes.PLAY,animal,room);
         EventManager eventManager=new EventManager();
         eventManager.handleEvent(event);
 
@@ -50,7 +50,7 @@ public class AnimalActivityTest {
         house.setFloors(floors);
         floor.setRooms(rooms);
         house.setAnimals(animals);
-        Event event=new Event(Even_Types.ANIMAL_THIRSTY,animal,room);
+        Event event=new Event(EventTypes.ANIMAL_THIRSTY,animal,room);
         PetFeeder petFeeder = new PetFeeder();
         petFeeder.update(event);
 
@@ -71,7 +71,7 @@ public class AnimalActivityTest {
         house.setFloors(floors);
         floor.setRooms(rooms);
         house.setAnimals(animals);
-        Event event=new Event(Even_Types.ANIMAL_HUNGRY,animal,room);
+        Event event=new Event(EventTypes.ANIMAL_HUNGRY,animal,room);
         PetFeeder petFeeder = new PetFeeder();
         petFeeder.update(event);
 

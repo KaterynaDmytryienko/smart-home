@@ -14,16 +14,23 @@ public class DeviceHandler implements EventHandler{
 
     /**
      * Method allows to handle an event.
-     * @param event
+     * @param event The event to handle.
      */
+
     @Override
     public void handleEvent(Event event) {
-        eventManager.alertObservers(event);
-            if (!event.isHandled){
+        try {
+            eventManager.alertObservers(event);
+            if (!event.isHandled) {
                 eventHandler.handleEvent(event);
-            }else{
+            } else {
                 eventManager.addToEvents(event);
             }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
 }

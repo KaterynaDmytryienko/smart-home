@@ -13,6 +13,12 @@ public class EventGenerator {
     private PersonActivity personActivity;
     private AnimalActivity animalActivity;
     private int counter = 0;
+
+    /**
+     * Constructs an {@code EventGenerator} with the specified {@link EventManager}.
+     *
+     * @param eventManager the event manager to notify about generated events
+     */
     public EventGenerator(EventManager eventManager) {
         this.eventManager = eventManager;
         personActivity = new PersonActivity();

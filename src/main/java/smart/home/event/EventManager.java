@@ -6,21 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventManager{
-    public List<Event> getEvents() {
-        return events;
-    }
-
     private List<Event>events = new ArrayList<>();
-
     List<Room> rooms;
-
-    private EventHandler firstHandler;
-
-    public List<String> getHandledEventsList() {
-        return handledEventsList;
-    }
-
     private List<String>handledEventsList = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
+    private EventHandler firstHandler;
 
     public EventManager(){
         EventHandler deviceHandler = new DeviceHandler(this);
@@ -31,7 +21,14 @@ public class EventManager{
 
         this.firstHandler = deviceHandler;
     }
-    private List<Observer> observers = new ArrayList<>();
+    public List<String> getHandledEventsList() {
+        return handledEventsList;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
     public void subscribe(Observer observer) {
         if(observer!=null) observers.add(observer);
     }
@@ -48,7 +45,7 @@ public class EventManager{
 
     /**
      * Method archives event in order to track history for reports.
-     * @param event
+     * @param event Event to be added.
      */
     public void addToEvents(Event event){
         events.add(event);

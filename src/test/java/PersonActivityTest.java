@@ -1,6 +1,5 @@
 
 import org.junit.Test;
-import smart.home.activity.PersonActivity;
 import smart.home.event.*;
 
 import smart.home.model.*;
@@ -27,7 +26,7 @@ public class PersonActivityTest {
         house.setPeople(people);
         house.setFloors(floors);
         floor.setRooms(rooms);
-        Event event=new Event(Even_Types.WORKOUT,person,room);
+        Event event=new Event(EventTypes.WORKOUT,person,room);
         EventManager eventManager=new EventManager();
         eventManager.handleEvent(event);
 
