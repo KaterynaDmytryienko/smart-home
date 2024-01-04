@@ -16,9 +16,7 @@ public class SmartHouseAPI {
     private House house;
     private long startTime = 0;
     private long endTime = 0;
-    public SmartHouseAPI() {
-        // this.eventManager = new EventManager();
-    }
+    public SmartHouseAPI() {}
     public long getStartTime() {
         return startTime;
     }

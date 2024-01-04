@@ -22,10 +22,6 @@ public class Bicycle extends Device {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public void update(Event event) {
 

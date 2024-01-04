@@ -11,10 +11,6 @@ import java.util.Random;
 public class AnimalActivity implements Activity {
     private List<Animal> animals = House.getHouse().getAnimals();
     House house = House.getHouse();
-    public List<Animal> getAnimals() {
-        return animals;
-    }
-
     /**
      * Method generates random animal events on a random floor in a random room.
      *
